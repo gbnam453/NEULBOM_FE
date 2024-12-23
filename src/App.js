@@ -1,43 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { enableScreens } from 'react-native-screens';
+import SplashScreen from './screens/SplashScreen';
+import HomeScreen from './screens/HomeScreen';
+enableScreens();
+
+const Stack = createStackNavigator();
 
 export default function App() {
-  const handlePress = () => {
-    Alert.alert('Button Press!', 'You clicked the button!');
-  };
-
   return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Hello, React Native!</Text>
-        <TouchableOpacity style={styles.button} onPress={handlePress}>
-          <Text style={styles.buttonText}>Press Me</Text>
-        </TouchableOpacity>
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }}/>
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#333',
-  },
-  button: {
-    backgroundColor: '#007BFF',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-});
