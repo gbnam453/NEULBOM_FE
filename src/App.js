@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
 
 export default function App() {
   const handlePress = () => {
-    Alert.alert('Button Pressed!', 'You clicked the button!');
+    Alert.alert('Button Press!', 'You clicked the button!');
   };
 
   return (
