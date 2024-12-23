@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
 import colors from '../styles/colors';
 import { useNavigation } from '@react-navigation/native'; // 네비게이션 훅 import
+import OneByOneButton from '../components/Buttons/OneByOneButton'; // 1x1Button 컴포넌트 임포트
 
 export default function HomeScreen() {
     const navigation = useNavigation();
@@ -11,6 +12,10 @@ export default function HomeScreen() {
     const handlePress = () => {
         // 알림 버튼 클릭 시 NotificationScreen으로 이동
         navigation.navigate('NotificationScreen');
+    };
+
+    const handleButtonPress = () => {
+        console.log('OneByOneButton Pressed');
     };
 
     return (
@@ -24,6 +29,11 @@ export default function HomeScreen() {
                     <ButtonIcon width={24} height={24} />
                 </TouchableOpacity>
             </View>
+
+            {/* 1x1Button 추가 */}
+            <View style={styles.buttonContainer}>
+                <OneByOneButton title="수업자료" onPress={handleButtonPress} />
+            </View>
         </SafeAreaView>
     );
 }
@@ -34,6 +44,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.gray050,
     },
     shadowBox: {
+        backgroundColor: 'red',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -45,5 +56,10 @@ const styles = StyleSheet.create({
     icon: {
         width: '15%',
         resizeMode: 'contain',
+    },
+    buttonContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20, // 버튼이 화면에 잘 보이도록 간격 조정
     },
 });
