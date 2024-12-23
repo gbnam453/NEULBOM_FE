@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, View, Dimensions } from 'react-native';
 import textStyles from '../../styles/textStyles'; // textStyles 가져오기
 
 export default function OneByOneButton({ title, onPress }) {
@@ -12,11 +12,14 @@ export default function OneByOneButton({ title, onPress }) {
     );
 }
 
+const { width: screenWidth } = Dimensions.get('window'); // 화면 가로 크기
+const adjustedWidth = screenWidth - 30; // 화면 가로 크기에서 20px을 뺀 값
+
 const styles = StyleSheet.create({
     button: {
         backgroundColor: 'white', // 배경을 흰색으로 설정
-        width: 100, // 정사각형 모양
-        height: 100,
+        width: adjustedWidth * (1 / 3),
+        height: adjustedWidth * (1 / 3),
         borderRadius: 16, // 네 귀퉁이 둥근 값 16px
         justifyContent: 'flex-start', // 버튼 내용 왼쪽 상단으로 정렬
         alignItems: 'flex-start', // 텍스트를 왼쪽으로 정렬
