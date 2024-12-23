@@ -1,18 +1,28 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context'; // SafeAreaView import
-import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg'; // SVG 파일 import
-import colors from '../styles/colors'; // 색상 파일 import
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
+import colors from '../styles/colors';
+import { useNavigation } from '@react-navigation/native'; // 네비게이션 훅 import
 
 export default function HomeScreen() {
+    const navigation = useNavigation();
+
+    const handlePress = () => {
+        // 알림 버튼 클릭 시 NotificationScreen으로 이동
+        navigation.navigate('NotificationScreen');
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.shadowBox}>
                 <Image
-                    source={require('../assets/images/Icons/Icon_Neulbom.png')} // 아이콘 경로
+                    source={require('../assets/images/Icons/Icon_Neulbom.png')}
                     style={styles.icon}
                 />
-                <ButtonIcon width={24} height={24}/> {/* SVG 파일을 컴포넌트로 사용 */}
+                <TouchableOpacity onPress={handlePress}>
+                    <ButtonIcon width={24} height={24} />
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
@@ -20,20 +30,20 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, // 화면 꽉 채움
+        flex: 1,
         backgroundColor: colors.gray050,
     },
     shadowBox: {
-        flexDirection: 'row', // 아이콘과 버튼을 가로로 정렬
-        alignItems: 'center', // 세로 중앙 정렬
-        justifyContent: 'space-between', // 양쪽 끝으로 정렬
-        width: '100%', // 화면 너비에 맞춤
-        height: '8%', // 세로 길이 60px
-        paddingLeft: 10, // 왼쪽 여백 10px
-        paddingRight: 20, // 오른쪽 여백 추가 (아이폰 안전구역)
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
+        height: '8%',
+        paddingLeft: 10,
+        paddingRight: 20,
     },
     icon: {
-        width: '15%', // 아이콘 너비
-        resizeMode: 'contain', // 비율 유지
+        width: '15%',
+        resizeMode: 'contain',
     },
 });
