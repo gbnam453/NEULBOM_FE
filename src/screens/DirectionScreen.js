@@ -3,14 +3,14 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../styles/colors'; // 색상 파일 import
 
-export default function NotificationScreen({ navigation }) {
+export default function DirectionScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
-                <Text style={styles.title}>알림 화면</Text>
+                <Text style={styles.title}>오시는길</Text>
                 <Text style={styles.description}>
-                    이곳은 공지 내용을 보여주는 화면입니다.
+                    이곳은 오시는길 내용을 보여주는 화면입니다.
                 </Text>
             </View>
         </SafeAreaView>

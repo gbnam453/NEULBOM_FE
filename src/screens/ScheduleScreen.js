@@ -12,13 +12,10 @@ export default function ScheduleScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
-                <Text style={styles.title}>알림 화면</Text>
+                <Text style={styles.title}>학사일정</Text>
                 <Text style={styles.description}>
                     이곳은 학사일정 내용을 보여주는 화면입니다.
                 </Text>
-                <TouchableOpacity style={styles.button} onPress={handlePress}>
-                    <Text style={styles.buttonText}>알림 버튼 클릭</Text>
-                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );

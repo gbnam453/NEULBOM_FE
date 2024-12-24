@@ -8,9 +8,9 @@ export default function NotificationScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
-                <Text style={styles.title}>알림 화면</Text>
+                <Text style={styles.title}>인사말</Text>
                 <Text style={styles.description}>
-                    이곳은 공지 내용을 보여주는 화면입니다.
+                    이곳은 인사말을 보여주는 화면입니다.
                 </Text>
             </View>
         </SafeAreaView>
