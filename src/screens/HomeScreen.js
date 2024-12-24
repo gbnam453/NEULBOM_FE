@@ -17,7 +17,7 @@ export default function HomeScreen() {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView edges={['top']} style={styles.container}>
             <View style={styles.shadowBox}>
                 <Image
                     source={require('../assets/images/Icons/Icon_Neulbom.png')}
@@ -85,9 +85,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.gray050,
+        height: '90%',
     },
     shadowBox: {
-        backgroundColor: colors.white000,
+        backgroundColor: colors.gray050,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -101,6 +102,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     buttonWrapper: {
+        backgroundColor: colors.gray050,
         paddingTop: 5,
         alignItems: 'center',
     },
