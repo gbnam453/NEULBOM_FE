@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     buttonWrapper: {
-        backgroundColor: colors.gray050,
+        backgroundColor: 'red',
+        //backgroundColor: colors.gray050,
         paddingTop: 5,
         alignItems: 'center',
     },

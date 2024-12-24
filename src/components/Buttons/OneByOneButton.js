@@ -6,7 +6,7 @@ export default function OneByOneButton({ title, onPress }) {
     return (
         <TouchableOpacity style={styles.button} onPress={onPress}>
             <View style={styles.titleContainer}>
-                <Text style={textStyles.title14Bold}>{title}</Text>
+                <Text style={textStyles.title18Bold}>{title}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start', // 버튼 내용 왼쪽 상단으로 정렬
         alignItems: 'flex-start', // 텍스트를 왼쪽으로 정렬
         paddingLeft: 12, // 왼쪽 여백 20px
-        paddingTop: 12, // 위쪽 여백 12px
+        paddingTop: 16, // 위쪽 여백 12px
         elevation: 2, // 약간의 엘리베이션 효과
         shadowColor: '#000', // 그림자 색상
         shadowOffset: { width: 0, height: 2 }, // 그림자 위치
