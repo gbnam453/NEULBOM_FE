@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../styles/colors'; // 색상 파일 import
 

@@ -59,6 +59,13 @@ export default function HomeScreen() {
                     {/* 세 번째 행 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
+                            <ThreeByOneButton title='banner'/>
+                        </View>
+                    </View>
+
+                    {/* 세 번째 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
                             <ThreeByOneButton title='SNS'/>
                         </View>
                     </View>

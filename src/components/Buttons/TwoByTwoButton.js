@@ -6,7 +6,7 @@ export default function TwoByTwoButton({ title, onPress, color = 'white' }) { //
     return (
         <TouchableOpacity style={[styles.button, { backgroundColor: color }]} onPress={onPress}>
             <View style={styles.titleContainer}>
-                <Text style={textStyles.title18Bold}>{title}</Text>
+                <Text style={textStyles.title24Bold}>{title}</Text>
             </View>
         </TouchableOpacity>
     );
