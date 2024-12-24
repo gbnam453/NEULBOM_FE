@@ -2,9 +2,9 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Dimensions } from 'react-native';
 import textStyles from '../../styles/textStyles'; // textStyles 가져오기
 
-export default function TwoByOneButton({ title, onPress }) {
+export default function TwoByOneButton({ title, onPress, color = 'white' }) { // 기본값 'white'
     return (
-        <TouchableOpacity style={styles.button} onPress={onPress}>
+        <TouchableOpacity style={[styles.button, { backgroundColor: color }]} onPress={onPress}>
             <View style={styles.titleContainer}>
                 <Text style={textStyles.title18Bold}>{title}</Text>
             </View>
@@ -13,11 +13,10 @@ export default function TwoByOneButton({ title, onPress }) {
 }
 
 const { width: screenWidth } = Dimensions.get('window'); // 화면 가로 크기
-const adjustedWidth = screenWidth - 25; // 화면 가로 크기에서 20px을 뺀 값
+const adjustedWidth = screenWidth - 25; // 화면 가로 크기에서 25px을 뺀 값
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: 'white', // 배경을 흰색으로 설정
         width: adjustedWidth * (2 / 3),
         height: adjustedWidth * (1 / 3) - 5,
         borderRadius: 16, // 네 귀퉁이 둥근 값 16px

@@ -30,17 +30,18 @@ export default function HomeScreen() {
 
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.buttonWrapper}>
+
                     {/* 첫 번째 행 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <TwoByTwoButton title="수업자료" onPress={() => navigateToScreen('DownloadScreen')} />
+                            <TwoByTwoButton title='수업자료' onPress={() => navigateToScreen('DownloadScreen')} />
                         </View>
                         <View style={styles.column}>
                             <View style={styles.buttonContainer}>
-                                <OneByOneButton title="공지사항" onPress={() => navigateToScreen('NoticeScreen')} />
+                                <OneByOneButton title='공지사항' onPress={() => navigateToScreen('NoticeScreen')} />
                             </View>
                             <View style={styles.buttonContainer}>
-                                <OneByOneButton title="학사일정" onPress={() => navigateToScreen('ScheduleScreen')} />
+                                <OneByOneButton title='학사일정' onPress={() => navigateToScreen('ScheduleScreen')} />
                             </View>
                         </View>
                     </View>
@@ -48,31 +49,31 @@ export default function HomeScreen() {
                     {/* 두 번째 행 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <TwoByOneButton title="서류제출" onPress={() => navigateToScreen('UploadScreen')} />
+                            <TwoByOneButton title='서류제출' onPress={() => navigateToScreen('UploadScreen')} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <OneByOneButton title="오시는길" onPress={() => navigateToScreen('DirectionScreen')} />
+                            <OneByOneButton title='오시는길' onPress={() => navigateToScreen('DirectionScreen')} />
                         </View>
                     </View>
 
                     {/* 세 번째 행 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <ThreeByOneButton title="SNS" onPress={() => navigateToScreen('SNS')} />
+                            <ThreeByOneButton title='SNS'/>
                         </View>
                     </View>
 
                     {/* 네 번째 행 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <ThreeByOneButton title="인사말" onPress={() => navigateToScreen('WelcomeMessageScreen')} />
+                            <ThreeByOneButton title='인사말' onPress={() => navigateToScreen('WelcomeMessageScreen')} />
                         </View>
                     </View>
 
                     {/* 다섯 번째 행 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <ThreeByOneButton title="문의처" onPress={() => navigateToScreen('ContactScreen')} />
+                            <ThreeByOneButton title='문의처' onPress={() => navigateToScreen('ContactScreen')} />
                         </View>
                     </View>
                 </View>
@@ -102,8 +103,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     buttonWrapper: {
-        backgroundColor: 'red',
-        //backgroundColor: colors.gray050,
+        backgroundColor: colors.gray050,
         paddingTop: 5,
         alignItems: 'center',
     },
