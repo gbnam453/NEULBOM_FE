@@ -13,7 +13,7 @@ export default function OneByOneButton({ title, onPress }) {
 }
 
 const { width: screenWidth } = Dimensions.get('window'); // 화면 가로 크기
-const adjustedWidth = screenWidth - 30; // 화면 가로 크기에서 20px을 뺀 값
+const adjustedWidth = screenWidth - 40; // 화면 가로 크기에서 20px을 뺀 값
 
 const styles = StyleSheet.create({
     button: {

@@ -9,6 +9,8 @@ import TwoByOneButton from '../components/Buttons/TwoByOneButton';
 import ThreeByOneButton from '../components/Buttons/ThreeByOneButton';
 import TwoByTwoButton from '../components/Buttons/TwoByTwoButton';
 
+// 기존 코드 유지
+
 export default function HomeScreen() {
     const navigation = useNavigation();
 
@@ -18,7 +20,7 @@ export default function HomeScreen() {
     };
 
     const handleButtonPress = () => {
-        console.log('OneByOneButton Pressed');
+        console.log('Button Pressed');
     };
 
     return (
@@ -33,45 +35,82 @@ export default function HomeScreen() {
                 </TouchableOpacity>
             </View>
 
-            {/* ScrollView로 버튼들을 감싸서 스크롤 가능하게 하고 좌우 여백 추가 */}
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.buttonWrapper}>
-                    {/* 1x1 버튼들 */}
-                    <View style={styles.row}>
-                        <View style={styles.buttonContainer}>
-                            <OneByOneButton title="수업자료" onPress={handleButtonPress} />
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <OneByOneButton title="수업자료" onPress={handleButtonPress} />
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <OneByOneButton title="수업자료" onPress={handleButtonPress} />
-                        </View>
-                    </View>
-
-                    {/* 2x1과 1x1 버튼 */}
-                    <View style={styles.row}>
-                        <View style={styles.buttonContainer}>
-                            <TwoByOneButton title="수업자료" onPress={handleButtonPress} />
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <OneByOneButton title="수업자료" onPress={handleButtonPress} />
-                        </View>
-                    </View>
-
-                    {/* 3x1 버튼 */}
-                    <View style={styles.row}>
-                        <View style={styles.buttonContainer}>
-                            <ThreeByOneButton title="수업자료" onPress={handleButtonPress} />
-                        </View>
-                    </View>
-
-                    {/* 2x2 버튼 */}
+                    {/* 첫 번째 행 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
                             <TwoByTwoButton title="수업자료" onPress={handleButtonPress} />
                         </View>
+                        <View style={styles.column}>
+                            <View style={styles.buttonContainer}>
+                                <OneByOneButton title="공지사항" onPress={handleButtonPress} />
+                            </View>
+                            <View style={styles.buttonContainer}>
+                                <OneByOneButton title="학사일정" onPress={handleButtonPress} />
+                            </View>
+                        </View>
                     </View>
+
+                    {/* 두 번째 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <TwoByOneButton title="서류제출" onPress={handleButtonPress} />
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <OneByOneButton title="오시는길" onPress={handleButtonPress} />
+                        </View>
+                    </View>
+
+                    {/* 세 번째 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <ThreeByOneButton title="SNS" onPress={handleButtonPress} />
+                        </View>
+                    </View>
+
+                    {/* 네 번째 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <ThreeByOneButton title="추가자료" onPress={handleButtonPress} />
+                        </View>
+                    </View>
+
+                    {/* 네 번째 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <ThreeByOneButton title="추가자료" onPress={handleButtonPress} />
+                        </View>
+                    </View>
+
+                    {/* 네 번째 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <ThreeByOneButton title="추가자료" onPress={handleButtonPress} />
+                        </View>
+                    </View>
+
+                    {/* 네 번째 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <ThreeByOneButton title="추가자료" onPress={handleButtonPress} />
+                        </View>
+                    </View>
+
+                    {/* 네 번째 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <ThreeByOneButton title="추가자료" onPress={handleButtonPress} />
+                        </View>
+                    </View>
+
+                    {/* 네 번째 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <ThreeByOneButton title="추가자료" onPress={handleButtonPress} />
+                        </View>
+                    </View>
+
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -84,12 +123,13 @@ const styles = StyleSheet.create({
         backgroundColor: colors.gray050,
     },
     shadowBox: {
+        backgroundColor: 'red',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '100%',
         height: '8%',
-        paddingLeft: 10,
+        paddingLeft: 20,
         paddingRight: 20,
     },
     icon: {
@@ -97,13 +137,23 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     buttonWrapper: {
-        paddingHorizontal: 10, // 좌우 여백 10px 추가
-        backgroundColor: 'red',
+        paddingTop: 5,
+        alignItems: 'center',
     },
     buttonContainer: {
-        marginTop: 20, // 버튼이 화면에 잘 보이도록 간격 조정
+        //margin: 5,
+        //padding: 5,
+        //paddingLeft: 5,
+        //paddingRight: 5,
+        //paddingTop: 5,
+        //paddingBottom: 5,
     },
     scrollContainer: {
-        paddingBottom: 20, // 스크롤 끝에 여백을 추가하여 버튼들이 잘 보이도록 조정
+        paddingBottom: 20,
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
     },
 });
