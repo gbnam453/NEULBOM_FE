@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
 import colors from '../styles/colors';
 import { useNavigation } from '@react-navigation/native';
+import NoticeButton from '../components/Buttons/NoticeButton';
 import OneByOneButton from '../components/Buttons/OneByOneButton';
 import TwoByOneButton from '../components/Buttons/TwoByOneButton';
 import ThreeByOneButton from '../components/Buttons/ThreeByOneButton';
@@ -30,6 +31,13 @@ export default function HomeScreen() {
 
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.buttonWrapper}>
+
+                    {/* 공지 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <NoticeButton title='이곳에 중요 공지가 표시될 예정이예요.'/>
+                        </View>
+                    </View>
 
                     {/* 첫 번째 행 */}
                     <View style={styles.row}>
@@ -111,7 +119,6 @@ const styles = StyleSheet.create({
     },
     buttonWrapper: {
         backgroundColor: colors.gray050,
-        paddingTop: 5,
         alignItems: 'center',
     },
     buttonContainer: {
