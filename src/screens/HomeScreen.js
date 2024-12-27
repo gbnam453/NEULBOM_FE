@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
-import NoticeIcon from '../assets/images/Buttons/Button_Notice.png';
 import colors from '../styles/colors';
 import { useNavigation } from '@react-navigation/native';
 import NoticeButton from '../components/Buttons/NoticeButton';
+import Banner from '../components/Banner/Banner';
 import OneByOneButton from '../components/Buttons/OneByOneButton';
 import TwoByOneButton from '../components/Buttons/TwoByOneButton';
 import ThreeByOneButton from '../components/Buttons/ThreeByOneButton';
@@ -68,9 +68,42 @@ export default function HomeScreen() {
                     {/* 세 번째 행 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <ThreeByOneButton title='banner'/>
+                            <Banner imageSource={require('../assets/images/Banner/Banner_Education.png')} />
                         </View>
                     </View>
+
+                    {/* 세 번째 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <Banner imageSource={require('../assets/images/Banner/Banner_KoreaScience.png')} />
+                        </View>
+                    </View>
+
+                    {/* 세 번째 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <Banner imageSource={require('../assets/images/Banner/Banner_HoseoUniv.png')} />
+                        </View>
+                    </View>
+
+                    {/* 세 번째 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <Banner imageSource={require('../assets/images/Banner/Banner_Neulbom.png')} />
+                        </View>
+                    </View>
+
+                    {/* 세 번째 행 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <Banner imageSource={require('../assets/images/Banner/Banner_gbnam.png')} />
+                        </View>
+                    </View>
+
+
+
+
+
 
                     {/* 세 번째 행 */}
                     <View style={styles.row}>
