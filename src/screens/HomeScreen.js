@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
+import NoticeIcon from '../assets/images/Buttons/Button_Notice.png';
 import colors from '../styles/colors';
 import { useNavigation } from '@react-navigation/native';
 import NoticeButton from '../components/Buttons/NoticeButton';
@@ -42,14 +43,14 @@ export default function HomeScreen() {
                     {/* 첫 번째 행 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <TwoByTwoButton title='수업자료' onPress={() => navigateToScreen('DownloadScreen')} />
+                            <TwoByTwoButton title='수업자료' imageSource={require('../assets/images/Buttons/Button_Download.png')} onPress={() => navigateToScreen('DownloadScreen')} />
                         </View>
                         <View style={styles.column}>
                             <View style={styles.buttonContainer}>
-                                <OneByOneButton title='공지사항' onPress={() => navigateToScreen('NoticeScreen')} />
+                                <OneByOneButton title='공지사항' imageSource={require('../assets/images/Buttons/Button_Notice.png')} onPress={() => navigateToScreen('NoticeScreen')} />
                             </View>
                             <View style={styles.buttonContainer}>
-                                <OneByOneButton title='학사일정' onPress={() => navigateToScreen('ScheduleScreen')} />
+                                <OneByOneButton title='학사일정' imageSource={require('../assets/images/Buttons/Button_Schedule.png')} onPress={() => navigateToScreen('ScheduleScreen')} />
                             </View>
                         </View>
                     </View>
@@ -57,10 +58,10 @@ export default function HomeScreen() {
                     {/* 두 번째 행 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <TwoByOneButton title='서류제출' onPress={() => navigateToScreen('UploadScreen')} />
+                            <TwoByOneButton title='서류제출' imageSource={require('../assets/images/Buttons/Button_Upload.png')} onPress={() => navigateToScreen('UploadScreen')} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <OneByOneButton title='오시는길' onPress={() => navigateToScreen('DirectionScreen')} />
+                            <OneByOneButton title='오시는길' imageSource={require('../assets/images/Buttons/Button_Direction.png')} onPress={() => navigateToScreen('DirectionScreen')} />
                         </View>
                     </View>
 
