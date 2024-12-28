@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // 네비게이션 훅 import
-import ButtonBack from '../assets/images/Buttons/Button_Back.svg'; // SVG 파일 임포트
+import ButtonBack from '../../assets/images/Buttons/Button_Back.svg'; // SVG 파일 임포트
 
 const { width } = Dimensions.get('window');
 

@@ -4,12 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
 import colors from '../styles/colors';
 import { useNavigation } from '@react-navigation/native';
-import NoticeButton from '../components/Buttons/NoticeButton';
-import Banner from '../components/Banner/Banner';
-import OneByOneButton from '../components/Buttons/OneByOneButton';
-import TwoByOneButton from '../components/Buttons/TwoByOneButton';
-import ThreeByOneButton from '../components/Buttons/ThreeByOneButton';
-import TwoByTwoButton from '../components/Buttons/TwoByTwoButton';
+import NoticeButton from '../components/HomeScreen/NoticeButton';
+import Banner from '../components/HomeScreen/Banner';
+import OneByOneButton from '../components/HomeScreen/OneByOneButton';
+import TwoByOneButton from '../components/HomeScreen/TwoByOneButton';
+import ThreeByOneButton from '../components/HomeScreen/ThreeByOneButton';
+import TwoByTwoButton from '../components/HomeScreen/TwoByTwoButton';
 
 export default function HomeScreen() {
     const navigation = useNavigation();

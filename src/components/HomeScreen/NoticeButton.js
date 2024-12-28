@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, StyleSheet, View, Dimensions } from 'react-nati
 import textStyles from '../../styles/textStyles';
 import colors from '../../styles/colors'; // textStyles 가져오기
 
-export default function ThreeByOneButton({ title, onPress }) {
+export default function NoticeButton({ title, onPress }) {
     return (
         <TouchableOpacity style={[styles.button, { backgroundColor: '#1E2530' }]} onPress={onPress}>
             {/* 공지 상자 */}

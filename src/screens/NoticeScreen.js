@@ -1,36 +1,23 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../styles/colors'; // 색상 파일 import
-import NavigationBar from '../components/NavigationBar'; // NavigationBar import
-import ThreeByOneButton from '../components/Buttons/ThreeByOneButton';
+import NavigationBar from '../components/Common/NavigationBar'; // NavigationBar import
+import NoticeListButton from '../components/NoticeScreen/NoticeListButton';
 
 export default function NoticeScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             {/* 네비게이션 바 */}
-            <NavigationBar title="공지사항"/>
-            {/* 화면 내용 */}
-            <View style={styles.content}>
-                {/* 세 번째 행 */}
+            <NavigationBar title="공지사항" />
+            {/* 스크롤 가능한 화면 내용 */}
+            <ScrollView contentContainerStyle={styles.scrollContent}>
                 <View style={styles.row}>
                     <View style={styles.buttonContainer}>
-                        <ThreeByOneButton title='SNS'/>
+                        <NoticeListButton title="첫번째 공지사항" date="2024-12-12"/>
                     </View>
                 </View>
-                {/* 세 번째 행 */}
-                <View style={styles.row}>
-                    <View style={styles.buttonContainer}>
-                        <ThreeByOneButton title='SNS'/>
-                    </View>
-                </View>
-                {/* 세 번째 행 */}
-                <View style={styles.row}>
-                    <View style={styles.buttonContainer}>
-                        <ThreeByOneButton title='SNS'/>
-                    </View>
-                </View>
-            </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -40,22 +27,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.gray050,
     },
-    content: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
+    scrollContent: {
         paddingHorizontal: 20,
+        paddingVertical: 10, // 스크롤뷰 패딩
+        alignItems: 'center',
     },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: colors.primary,
+    buttonContainer: {
         marginBottom: 10,
-    },
-    description: {
-        fontSize: 16,
-        color: colors.text,
-        textAlign: 'center',
-        marginBottom: 20,
     },
 });
