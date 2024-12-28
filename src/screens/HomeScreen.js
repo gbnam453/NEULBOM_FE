@@ -68,46 +68,6 @@ export default function HomeScreen() {
                     {/* 세 번째 행 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <Banner imageSource={require('../assets/images/Banner/Banner_Education.png')} />
-                        </View>
-                    </View>
-
-                    {/* 세 번째 행 */}
-                    <View style={styles.row}>
-                        <View style={styles.buttonContainer}>
-                            <Banner imageSource={require('../assets/images/Banner/Banner_KoreaScience.png')} />
-                        </View>
-                    </View>
-
-                    {/* 세 번째 행 */}
-                    <View style={styles.row}>
-                        <View style={styles.buttonContainer}>
-                            <Banner imageSource={require('../assets/images/Banner/Banner_HoseoUniv.png')} />
-                        </View>
-                    </View>
-
-                    {/* 세 번째 행 */}
-                    <View style={styles.row}>
-                        <View style={styles.buttonContainer}>
-                            <Banner imageSource={require('../assets/images/Banner/Banner_Neulbom.png')} />
-                        </View>
-                    </View>
-
-                    {/* 세 번째 행 */}
-                    <View style={styles.row}>
-                        <View style={styles.buttonContainer}>
-                            <Banner imageSource={require('../assets/images/Banner/Banner_gbnam.png')} />
-                        </View>
-                    </View>
-
-
-
-
-
-
-                    {/* 세 번째 행 */}
-                    <View style={styles.row}>
-                        <View style={styles.buttonContainer}>
                             <ThreeByOneButton title='SNS'/>
                         </View>
                     </View>

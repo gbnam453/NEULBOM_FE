@@ -1,12 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../styles/colors'; // 색상 파일 import
+import NavigationBar from '../components/NavigationBar'; // NavigationBar import
 
-export default function NotificationScreen({ navigation }) {
-
+export default function NoticeScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
+            {/* 네비게이션 바 */}
+            <NavigationBar title="공지사항"/>
+            {/* 화면 내용 */}
             <View style={styles.content}>
                 <Text style={styles.title}>공지사항</Text>
                 <Text style={styles.description}>
@@ -39,15 +42,5 @@ const styles = StyleSheet.create({
         color: colors.text,
         textAlign: 'center',
         marginBottom: 20,
-    },
-    button: {
-        backgroundColor: colors.primary,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 5,
-    },
-    buttonText: {
-        fontSize: 16,
-        color: 'white',
     },
 });
