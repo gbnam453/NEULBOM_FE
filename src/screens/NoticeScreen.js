@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../styles/colors'; // 색상 파일 import
 import NavigationBar from '../components/NavigationBar'; // NavigationBar import
+import ThreeByOneButton from '../components/Buttons/ThreeByOneButton';
 
 export default function NoticeScreen({ navigation }) {
     return (
@@ -11,10 +12,24 @@ export default function NoticeScreen({ navigation }) {
             <NavigationBar title="공지사항"/>
             {/* 화면 내용 */}
             <View style={styles.content}>
-                <Text style={styles.title}>공지사항</Text>
-                <Text style={styles.description}>
-                    이곳은 공지사항 내용을 보여주는 화면입니다.
-                </Text>
+                {/* 세 번째 행 */}
+                <View style={styles.row}>
+                    <View style={styles.buttonContainer}>
+                        <ThreeByOneButton title='SNS'/>
+                    </View>
+                </View>
+                {/* 세 번째 행 */}
+                <View style={styles.row}>
+                    <View style={styles.buttonContainer}>
+                        <ThreeByOneButton title='SNS'/>
+                    </View>
+                </View>
+                {/* 세 번째 행 */}
+                <View style={styles.row}>
+                    <View style={styles.buttonContainer}>
+                        <ThreeByOneButton title='SNS'/>
+                    </View>
+                </View>
             </View>
         </SafeAreaView>
     );
@@ -27,7 +42,7 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         paddingHorizontal: 20,
     },
