@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // 네비게이션 훅 import
 import ButtonBack from '../../assets/images/Buttons/Button_Back.svg';
-import textStyles from '../../styles/textStyles'; // SVG 파일 임포트
+import textStyles from '../../styles/textStyles'; // textStyles 임포트
 
 const { width } = Dimensions.get('window');
 
@@ -16,7 +16,7 @@ const NavigationBar = ({ title }) => {
                 <ButtonBack width={24} height={24} />
             </TouchableOpacity>
             {/* 타이틀 */}
-            <Text style={styles.title}>{title}</Text>
+            <Text style={[styles.title, textStyles.title22Bold]}>{title}</Text>
         </View>
     );
 };
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         color: '#000', // 필요에 따라 수정
-        fontStyle: 'textStyles.title22Bold', // 사용자 정의 폰트 이름
     },
 });
 

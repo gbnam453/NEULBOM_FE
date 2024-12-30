@@ -80,21 +80,27 @@ export default function DirectionScreen({ navigation }) {
 
                 {/* 지도 버튼 */}
                 <View style={styles.row}>
-                    <OneByOneButton_V2
-                        title="네이버 지도"
-                        imageSource={require('../assets/images/DirectionScreen/navermap.png')}
-                        onPress={openNaverMap}
-                    />
-                    <OneByOneButton_V2
-                        title="카카오맵"
-                        imageSource={require('../assets/images/DirectionScreen/kakaomap.png')}
-                        onPress={openKakaoMap}
-                    />
-                    <OneByOneButton_V2
-                        title="티맵"
-                        imageSource={require('../assets/images/DirectionScreen/tmap.png')}
-                        onPress={openTMap}
-                    />
+                    <View style={styles.buttonContainer}>
+                        <OneByOneButton_V2
+                            title="네이버 지도"
+                            imageSource={require('../assets/images/DirectionScreen/navermap.png')}
+                            onPress={openNaverMap}
+                        />
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <OneByOneButton_V2
+                            title="카카오맵"
+                            imageSource={require('../assets/images/DirectionScreen/kakaomap.png')}
+                            onPress={openKakaoMap}
+                        />
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <OneByOneButton_V2
+                            title="티맵"
+                            imageSource={require('../assets/images/DirectionScreen/tmap.png')}
+                            onPress={openTMap}
+                        />
+                    </View>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -124,9 +130,9 @@ const styles = StyleSheet.create({
         height: adjustedWidth * 0.8,
         borderRadius: 16,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 5 },
-        shadowOpacity: 0.2,
-        shadowRadius: 10,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
         elevation: 1,
     },
     addressText: {
@@ -140,6 +146,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        marginTop: 20,
+        marginTop: 10,
+    },
+    buttonContainer: {
+        margin: 5,
     },
 });

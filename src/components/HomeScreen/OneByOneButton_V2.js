@@ -13,7 +13,7 @@ export default function OneByOneButton_V2({ title, onPress, color = 'white', ima
                 />
             )}
             <View style={styles.titleContainer}>
-                <Text style={textStyles.title22Bold}>{title}</Text>
+                <Text style={textStyles.title18Bold}>{title}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
         alignItems: 'center', // 텍스트 가로 중앙 정렬
     },
     image: {
-        width: adjustedWidth * (1 / 6), // 이미지 크기
-        height: adjustedWidth * (1 / 6), // 이미지 크기
+        width: adjustedWidth * 0.15, // 이미지 크기
+        height: adjustedWidth * 0.15, // 이미지 크기
         borderRadius: 8, // 이미지 모서리 둥글게
     },
 });

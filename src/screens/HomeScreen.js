@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
 import colors from '../styles/colors';
@@ -10,12 +10,17 @@ import OneByOneButton from '../components/HomeScreen/OneByOneButton';
 import TwoByOneButton from '../components/HomeScreen/TwoByOneButton';
 import ThreeByOneButton from '../components/HomeScreen/ThreeByOneButton';
 import TwoByTwoButton from '../components/HomeScreen/TwoByTwoButton';
+import OneByOneButton_V2 from '../components/HomeScreen/OneByOneButton_V2';
 
 export default function HomeScreen() {
     const navigation = useNavigation();
 
     const navigateToScreen = (screenName) => {
         navigation.navigate(screenName);
+    };
+
+    const openURL = (url) => {
+        Linking.openURL(url).catch(err => console.error("Failed to open URL: ", err));
     };
 
     return (
@@ -72,17 +77,23 @@ export default function HomeScreen() {
                         </View>
                     </View>
 
+                    {/* SNS */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <OneByOneButton_V2 title='유튜브' imageSource={require('../assets/images/Icons/Icon_YouTube.png')} onPress={() => openURL('https://www.youtube.com/@neul2bom2/featured')} />
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <OneByOneButton_V2 title='인스타그램' imageSource={require('../assets/images/Icons/Icon_Instagram.png')} onPress={() => openURL('https://www.instagram.com/neul2bom2?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==')} />
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <OneByOneButton_V2 title='페이스북' imageSource={require('../assets/images/Icons/Icon_Facebook.png')} onPress={() => openURL('https://www.facebook.com/people/늘봄/61553601422680/')} />
+                        </View>
+                    </View>
+
                     {/* 문의처 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
                             <ThreeByOneButton title='문의처' detail='이곳으로 연락해주세요!' imageSource={require('../assets/images/Buttons/Button_Notice.png')} onPress={() => navigateToScreen('ContactScreen')} />
-                        </View>
-                    </View>
-
-                    {/* SNS */}
-                    <View style={styles.row}>
-                        <View style={styles.buttonContainer}>
-                            <ThreeByOneButton title='SNS' detail='늘이와 봄이' imageSource={require('../assets/images/Buttons/Button_Notice.png')}/>
                         </View>
                     </View>
 
