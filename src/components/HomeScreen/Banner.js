@@ -44,8 +44,7 @@ const styles = StyleSheet.create({
         alignItems: 'center', // 이미지 가로 중앙 정렬
     },
     image: {
-        height: adjustedWidth, // 버튼 높이에 맞추기
-        padding: 36,
-        aspectRatio: 1, // 비율 유지 (기본 1:1, 필요시 조정 가능)
+        width: adjustedWidth - 36,
+        height: adjustedWidth * (1 / 3), // 버튼 높이에 맞추기
     },
 });

@@ -33,14 +33,14 @@ export default function HomeScreen() {
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.buttonWrapper}>
 
-                    {/* 공지 행 */}
+                    {/* 중요공지 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
                             <NoticeButton title='이곳에 중요 공지가 표시될 예정이예요.'/>
                         </View>
                     </View>
 
-                    {/* 첫 번째 행 */}
+                    {/* 수업자료, 공지사항, 학사일정 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
                             <TwoByTwoButton title='수업자료' imageSource={require('../assets/images/Buttons/Button_Download.png')} onPress={() => navigateToScreen('DownloadScreen')} />
@@ -55,7 +55,7 @@ export default function HomeScreen() {
                         </View>
                     </View>
 
-                    {/* 두 번째 행 */}
+                    {/* 서류제출, 오시는길 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
                             <TwoByOneButton title='서류제출' imageSource={require('../assets/images/Buttons/Button_Upload.png')} onPress={() => navigateToScreen('UploadScreen')} />
@@ -65,26 +65,34 @@ export default function HomeScreen() {
                         </View>
                     </View>
 
-                    {/* 세 번째 행 */}
+                    {/* 배너 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <ThreeByOneButton title='SNS'/>
+                            <Banner imageSource={require('../assets/images/Banner/Banner_HoseoUniv.png')}/>
                         </View>
                     </View>
 
-                    {/* 네 번째 행 */}
+                    {/* 문의처 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <ThreeByOneButton title='인사말' onPress={() => navigateToScreen('WelcomeMessageScreen')} />
+                            <ThreeByOneButton title='문의처' detail='이곳으로 연락해주세요!' imageSource={require('../assets/images/Buttons/Button_Notice.png')} onPress={() => navigateToScreen('ContactScreen')} />
                         </View>
                     </View>
 
-                    {/* 다섯 번째 행 */}
+                    {/* SNS */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <ThreeByOneButton title='문의처' onPress={() => navigateToScreen('ContactScreen')} />
+                            <ThreeByOneButton title='SNS' detail='늘이와 봄이' imageSource={require('../assets/images/Buttons/Button_Notice.png')}/>
                         </View>
                     </View>
+
+                    {/* 인사말 */}
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <ThreeByOneButton title='인사말' detail='환영합니다' imageSource={require('../assets/images/Buttons/Button_Notice.png')} onPress={() => navigateToScreen('WelcomeMessageScreen')} />
+                        </View>
+                    </View>
+
                 </View>
             </ScrollView>
         </SafeAreaView>
