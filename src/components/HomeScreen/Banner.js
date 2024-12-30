@@ -1,9 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, View, Dimensions, Image } from 'react-native';
+import { StyleSheet, View, Dimensions, Image } from 'react-native';
 
-export default function Banner({ onPress, color = 'white', imageSource }) { // imageSource 추가
+export default function Banner({ color = 'white', imageSource }) { // imageSource 추가
     return (
-        <TouchableOpacity style={[styles.button, { backgroundColor: color }]} onPress={onPress}>
+        <View style={[styles.button, { backgroundColor: color }]}>
             <View style={styles.imageContainer}>
                 {imageSource && (
                     <Image
@@ -13,7 +13,7 @@ export default function Banner({ onPress, color = 'white', imageSource }) { // i
                     />
                 )}
             </View>
-        </TouchableOpacity>
+        </View>
     );
 }
 

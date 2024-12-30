@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // 네비게이션 훅 import
-import ButtonBack from '../../assets/images/Buttons/Button_Back.svg'; // SVG 파일 임포트
+import ButtonBack from '../../assets/images/Buttons/Button_Back.svg';
+import textStyles from '../../styles/textStyles'; // SVG 파일 임포트
 
 const { width } = Dimensions.get('window');
 
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         color: '#000', // 필요에 따라 수정
-        fontFamily: 'textStyles.title22Bold', // 사용자 정의 폰트 이름
+        fontStyle: 'textStyles.title22Bold', // 사용자 정의 폰트 이름
     },
 });
 

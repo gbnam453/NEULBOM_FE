@@ -1,48 +1,99 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Linking, Dimensions} from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text, Linking, Dimensions, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import colors from '../styles/colors'; // 색상 파일 import
+import colors from '../styles/colors';
+import textStyles from '../styles/textStyles'; // textStyles 가져오기
 import NavigationBar from '../components/Common/NavigationBar';
-import ThreeByOneButton from '../components/HomeScreen/ThreeByOneButton'; // ThreeByOneButton import
+import OneByOneButton_V2 from '../components/HomeScreen/OneByOneButton_V2';
 
 export default function DirectionScreen({ navigation }) {
     const openKakaoMap = () => {
-        Linking.openURL('kakaomap://open');
+        const url = 'kakaomap://place?id=893613647';
+        Linking.canOpenURL(url)
+            .then((supported) => {
+                if (supported) {
+                    Linking.openURL(url);
+                } else {
+                    Linking.openURL(
+                        Platform.OS === 'ios'
+                            ? 'https://apps.apple.com/kr/app/kakao-map/id304608425'
+                            : 'market://details?id=net.daum.android.map'
+                    );
+                }
+            })
+            .catch((err) => console.error('An error occurred', err));
     };
 
     const openNaverMap = () => {
-        Linking.openURL('naversearchapp://addshortcut?url=http%3A%2F%2Fm.nstore.naver.com&icon=http%3A%2F%2Fstatic.naver.net%2Fwww%2Fu%2F2012%2F0604%2Fnmms_153256734.png&title=N%EC%8A%A4%ED%86%A0%EC%96%B4&serviceCode=nstore&version=7');
+        const url = 'nmap://place?id=1070453055';
+        Linking.canOpenURL(url)
+            .then((supported) => {
+                if (supported) {
+                    Linking.openURL(url);
+                } else {
+                    Linking.openURL(
+                        Platform.OS === 'ios'
+                            ? 'https://apps.apple.com/kr/app/naver-map-navigate/id311867728'
+                            : 'market://details?id=com.nhn.android.nmap'
+                    );
+                }
+            })
+            .catch((err) => console.error('An error occurred', err));
+    };
+
+    const openTMap = () => {
+        const url = 'tmap://route?goalname=호서대학교 KTX캠퍼스&goalx=127.123456&goaly=36.123456';
+        Linking.canOpenURL(url)
+            .then((supported) => {
+                if (supported) {
+                    Linking.openURL(url);
+                } else {
+                    Linking.openURL(
+                        Platform.OS === 'ios'
+                            ? 'https://apps.apple.com/kr/app/tmap/id431589174'
+                            : 'market://details?id=com.skt.tmap.ku'
+                    );
+                }
+            })
+            .catch((err) => console.error('An error occurred', err));
     };
 
     return (
         <SafeAreaView style={styles.container}>
-            {/* 네비게이션 바 */}
             <NavigationBar title="오시는길" />
-
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 {/* 스케치 맵 이미지 */}
                 <Image
-                    source={require('../assets/images/Direction/sketchmap.png')}
+                    source={require('../assets/images/DirectionScreen/sketchmap.png')}
                     style={styles.mapImage}
                 />
 
-                {/* 카카오맵 버튼 */}
-                <View style={styles.buttonContainer}>
-                    <ThreeByOneButton
+                {/* 학교 이름 */}
+                <Text style={[textStyles.title22Bold, styles.schoolName]}>
+                    호서대학교 KTX캠퍼스
+                </Text>
+
+                {/* 주소 텍스트 */}
+                <Text style={[textStyles.subtitle14SemiBold16, styles.addressText]}>
+                    충남 아산시 배방읍 고속철대로 71 (우)31470
+                </Text>
+
+                {/* 지도 버튼 */}
+                <View style={styles.row}>
+                    <OneByOneButton_V2
+                        title="네이버 지도"
+                        imageSource={require('../assets/images/DirectionScreen/navermap.png')}
+                        onPress={openNaverMap}
+                    />
+                    <OneByOneButton_V2
                         title="카카오맵"
-                        detail="호서대학교 KTX캠퍼스"
-                        imageSource={require('../assets/images/Direction/kakaomap.png')}
+                        imageSource={require('../assets/images/DirectionScreen/kakaomap.png')}
                         onPress={openKakaoMap}
                     />
-                </View>
-
-                {/* 네이버 지도 버튼 */}
-                <View style={styles.buttonContainer}>
-                    <ThreeByOneButton
-                        title="네이버 지도"
-                        detail="호서대학교 KTX캠퍼스"
-                        imageSource={require('../assets/images/Direction/navermap.png')}
-                        onPress={openNaverMap}
+                    <OneByOneButton_V2
+                        title="티맵"
+                        imageSource={require('../assets/images/DirectionScreen/tmap.png')}
+                        onPress={openTMap}
                     />
                 </View>
             </ScrollView>
@@ -50,8 +101,8 @@ export default function DirectionScreen({ navigation }) {
     );
 }
 
-const { width: screenWidth } = Dimensions.get('window'); // 화면 가로 크기
-const adjustedWidth = screenWidth - 20; // 화면 가로 크기에서 20px을 뺀 값
+const { width: screenWidth } = Dimensions.get('window');
+const adjustedWidth = screenWidth - 20;
 
 const styles = StyleSheet.create({
     container: {
@@ -59,21 +110,36 @@ const styles = StyleSheet.create({
         backgroundColor: colors.gray050,
     },
     scrollContent: {
-        alignItems: 'center', // alignItems를 contentContainerStyle로 이동
+        alignItems: 'center',
         paddingHorizontal: 20,
-        paddingVertical: 10, // 스크롤뷰 패딩
+        paddingVertical: 10,
+    },
+    schoolName: {
+        marginTop: 10, // 학교 이름 아래 여백
+        textAlign: 'center',
+        color: colors.gray900,
     },
     mapImage: {
-        width: adjustedWidth, // 화면 너비에 맞게 이미지 크기 설정
-        height: 300, // 높이는 원래 이미지 비율로 설정
-        borderRadius: 16, // 이미지 끝을 둥글게
-        shadowColor: '#000', // 그림자 색상
-        shadowOffset: { width: 0, height: 5 }, // 그림자의 위치
-        shadowOpacity: 0.2, // 그림자의 투명도
-        shadowRadius: 10, // 그림자의 흐림 정도
-        elevation: 1, // 안드로이드에서 그림자 효과를 추가하려면 elevation 필요
+        width: adjustedWidth,
+        height: adjustedWidth * 0.8,
+        borderRadius: 16,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        elevation: 1,
     },
-    buttonContainer: {
-        marginTop: 10, // 이미지와 버튼 사이에 여백 추가
+    addressText: {
+        marginTop: 10,
+        fontSize: 14,
+        fontWeight: '600',
+        color: colors.gray700,
+        textAlign: 'center',
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginTop: 20,
     },
 });
