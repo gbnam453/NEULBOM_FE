@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking, Text } from 'react-native';
+import React, { useRef, useState, useEffect } from 'react';
+import { View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking, FlatList, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
 import colors from '../styles/colors';
@@ -11,18 +11,56 @@ import TwoByOneButton from '../components/HomeScreen/TwoByOneButton';
 import ThreeByOneButton from '../components/HomeScreen/ThreeByOneButton';
 import TwoByTwoButton from '../components/HomeScreen/TwoByTwoButton';
 import OneByOneButton_V2 from '../components/HomeScreen/OneByOneButton_V2';
-import textStyles from '../styles/textStyles'; // 폰트 스타일 가져오기
-import pkg from '../../package.json'; // package.json에서 버전 가져오기
+
+const { width: screenWidth } = Dimensions.get('window');
 
 export default function HomeScreen() {
     const navigation = useNavigation();
+    const flatListRef = useRef(null);
+    const [currentIndex, setCurrentIndex] = useState(1);
+
+    const banners = [
+        require('../assets/images/Banner/Banner_HoseoUniv.png'),
+        require('../assets/images/Banner/Banner_KoreaScience.png'),
+        require('../assets/images/Banner/Banner_Education.png'),
+        require('../assets/images/Banner/Banner_Neulbom.png'),
+        require('../assets/images/Banner/Banner_gbnam.png'),
+    ];
+
+    const infiniteBanners = [banners[banners.length - 1], ...banners, banners[0]];
 
     const navigateToScreen = (screenName) => {
         navigation.navigate(screenName);
     };
 
     const openURL = (url) => {
-        Linking.openURL(url).catch(err => console.error("Failed to open URL: ", err));
+        Linking.openURL(url).catch((err) => console.error('Failed to open URL: ', err));
+    };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const nextIndex = currentIndex + 1;
+            setCurrentIndex(nextIndex);
+
+            flatListRef.current.scrollToIndex({ index: nextIndex, animated: true });
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, [currentIndex]);
+
+    const handleScrollEnd = (e) => {
+        const contentOffsetX = e.nativeEvent.contentOffset.x;
+        const newIndex = Math.round(contentOffsetX / screenWidth);
+
+        if (newIndex === 0) {
+            flatListRef.current.scrollToIndex({ index: infiniteBanners.length - 2, animated: false });
+            setCurrentIndex(infiniteBanners.length - 2);
+        } else if (newIndex === infiniteBanners.length - 1) {
+            flatListRef.current.scrollToIndex({ index: 1, animated: false });
+            setCurrentIndex(1);
+        } else {
+            setCurrentIndex(newIndex);
+        }
     };
 
     return (
@@ -49,14 +87,26 @@ export default function HomeScreen() {
                     {/* 수업자료, 공지사항, 학사일정 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <TwoByTwoButton title="수업자료" imageSource={require('../assets/images/Buttons/Button_Download.png')} onPress={() => navigateToScreen('DownloadScreen')} />
+                            <TwoByTwoButton
+                                title="수업자료"
+                                imageSource={require('../assets/images/Buttons/Button_Download.png')}
+                                onPress={() => navigateToScreen('DownloadScreen')}
+                            />
                         </View>
                         <View style={styles.column}>
                             <View style={styles.buttonContainer}>
-                                <OneByOneButton title="공지사항" imageSource={require('../assets/images/Buttons/Button_Notice.png')} onPress={() => navigateToScreen('NoticeScreen')} />
+                                <OneByOneButton
+                                    title="공지사항"
+                                    imageSource={require('../assets/images/Buttons/Button_Notice.png')}
+                                    onPress={() => navigateToScreen('NoticeScreen')}
+                                />
                             </View>
                             <View style={styles.buttonContainer}>
-                                <OneByOneButton title="학사일정" imageSource={require('../assets/images/Buttons/Button_Schedule.png')} onPress={() => navigateToScreen('ScheduleScreen')} />
+                                <OneByOneButton
+                                    title="학사일정"
+                                    imageSource={require('../assets/images/Buttons/Button_Schedule.png')}
+                                    onPress={() => navigateToScreen('ScheduleScreen')}
+                                />
                             </View>
                         </View>
                     </View>
@@ -64,53 +114,89 @@ export default function HomeScreen() {
                     {/* 서류제출, 오시는길 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <TwoByOneButton title="서류제출" imageSource={require('../assets/images/Buttons/Button_Upload.png')} onPress={() => navigateToScreen('UploadScreen')} />
+                            <TwoByOneButton
+                                title="서류제출"
+                                imageSource={require('../assets/images/Buttons/Button_Upload.png')}
+                                onPress={() => navigateToScreen('UploadScreen')}
+                            />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <OneByOneButton title="오시는길" imageSource={require('../assets/images/Buttons/Button_Direction.png')} onPress={() => navigateToScreen('DirectionScreen')} />
+                            <OneByOneButton
+                                title="오시는길"
+                                imageSource={require('../assets/images/Buttons/Button_Direction.png')}
+                                onPress={() => navigateToScreen('DirectionScreen')}
+                            />
                         </View>
                     </View>
 
                     {/* 배너 */}
-                    <View style={styles.row}>
-                        <View style={styles.buttonContainer}>
-                            <Banner imageSource={require('../assets/images/Banner/Banner_HoseoUniv.png')} />
-                        </View>
+                    <View style={styles.bannerContainer}>
+                        <FlatList
+                            data={infiniteBanners}
+                            keyExtractor={(_, index) => index.toString()}
+                            renderItem={({ item }) => (
+                                <View style={styles.bannerWrapper}>
+                                    <Banner imageSource={item} />
+                                </View>
+                            )}
+                            horizontal
+                            pagingEnabled
+                            showsHorizontalScrollIndicator={false}
+                            ref={flatListRef}
+                            onMomentumScrollEnd={handleScrollEnd}
+                            snapToInterval={screenWidth} // 한 번에 하나의 배너
+                            decelerationRate="fast"
+                        />
                     </View>
 
                     {/* SNS */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <OneByOneButton_V2 title="유튜브" imageSource={require('../assets/images/Icons/Icon_YouTube.png')} onPress={() => openURL('https://www.youtube.com/@neul2bom2/featured')} />
+                            <OneByOneButton_V2
+                                title="유튜브"
+                                imageSource={require('../assets/images/Icons/Icon_YouTube.png')}
+                                onPress={() => openURL('https://www.youtube.com/@neul2bom2/featured')}
+                            />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <OneByOneButton_V2 title="인스타그램" imageSource={require('../assets/images/Icons/Icon_Instagram.png')} onPress={() => openURL('https://www.instagram.com/neul2bom2?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==')} />
+                            <OneByOneButton_V2
+                                title="인스타그램"
+                                imageSource={require('../assets/images/Icons/Icon_Instagram.png')}
+                                onPress={() => openURL('https://www.instagram.com/neul2bom2')}
+                            />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <OneByOneButton_V2 title="페이스북" imageSource={require('../assets/images/Icons/Icon_Facebook.png')} onPress={() => openURL('https://www.facebook.com/people/늘봄/61553601422680/')} />
+                            <OneByOneButton_V2
+                                title="페이스북"
+                                imageSource={require('../assets/images/Icons/Icon_Facebook.png')}
+                                onPress={() => openURL('https://www.facebook.com/people/늘봄/61553601422680/')}
+                            />
                         </View>
                     </View>
 
                     {/* 문의처 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <ThreeByOneButton title="문의처" detail="이곳으로 연락해주세요!" imageSource={require('../assets/images/Buttons/Button_Notice.png')} onPress={() => navigateToScreen('ContactScreen')} />
+                            <ThreeByOneButton
+                                title="문의처"
+                                detail="이곳으로 연락해주세요!"
+                                imageSource={require('../assets/images/Buttons/Button_Notice.png')}
+                                onPress={() => navigateToScreen('ContactScreen')}
+                            />
                         </View>
                     </View>
 
                     {/* 인사말 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <ThreeByOneButton title="인사말" detail="환영합니다" imageSource={require('../assets/images/Buttons/Button_Notice.png')} onPress={() => navigateToScreen('WelcomeMessageScreen')} />
+                            <ThreeByOneButton
+                                title="인사말"
+                                detail="환영합니다"
+                                imageSource={require('../assets/images/Buttons/Button_Notice.png')}
+                                onPress={() => navigateToScreen('WelcomeMessageScreen')}
+                            />
                         </View>
                     </View>
-                </View>
-
-                {/* 현재 버전 표시 */}
-                <View style={styles.versionContainer}>
-                    <Text style={[textStyles.subtitle14SemiBold16, { color: colors.gray300 }]}>
-                        V{pkg.version}-beta
-                    </Text>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -121,7 +207,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.gray050,
-        height: '90%',
     },
     shadowBox: {
         backgroundColor: colors.gray050,
@@ -152,8 +237,14 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
-    versionContainer: {
+    bannerContainer: {
+        width: screenWidth,
         alignItems: 'center',
-        marginTop: 20,
+        marginVertical: 10,
+    },
+    bannerWrapper: {
+        width: screenWidth,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
