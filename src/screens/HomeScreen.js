@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking, FlatList, Dimensions } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking, FlatList, Dimensions, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
 import colors from '../styles/colors';
@@ -11,6 +11,7 @@ import TwoByOneButton from '../components/HomeScreen/TwoByOneButton';
 import ThreeByOneButton from '../components/HomeScreen/ThreeByOneButton';
 import TwoByTwoButton from '../components/HomeScreen/TwoByTwoButton';
 import OneByOneButton_V2 from '../components/HomeScreen/OneByOneButton_V2';
+import pkg from '../../package.json'; // 버전 정보 가져오기
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -20,11 +21,10 @@ export default function HomeScreen() {
     const [currentIndex, setCurrentIndex] = useState(1);
 
     const banners = [
-        require('../assets/images/Banner/Banner_HoseoUniv.png'),
-        require('../assets/images/Banner/Banner_KoreaScience.png'),
         require('../assets/images/Banner/Banner_Education.png'),
+        require('../assets/images/Banner/Banner_KoreaScience.png'),
+        require('../assets/images/Banner/Banner_HoseoUniv.png'),
         require('../assets/images/Banner/Banner_Neulbom.png'),
-        require('../assets/images/Banner/Banner_gbnam.png'),
     ];
 
     const infiniteBanners = [banners[banners.length - 1], ...banners, banners[0]];
@@ -37,11 +37,20 @@ export default function HomeScreen() {
         Linking.openURL(url).catch((err) => console.error('Failed to open URL: ', err));
     };
 
+    // 이미지 미리 로드
+    useEffect(() => {
+        const preloadImages = async () => {
+            await Promise.all(
+                banners.map((image) => Image.prefetch(Image.resolveAssetSource(image).uri))
+            );
+        };
+        preloadImages();
+    }, []);
+
     useEffect(() => {
         const interval = setInterval(() => {
             const nextIndex = currentIndex + 1;
             setCurrentIndex(nextIndex);
-
             flatListRef.current.scrollToIndex({ index: nextIndex, animated: true });
         }, 3000);
 
@@ -62,6 +71,12 @@ export default function HomeScreen() {
             setCurrentIndex(newIndex);
         }
     };
+
+    const getItemLayout = (_, index) => ({
+        length: screenWidth,
+        offset: screenWidth * index,
+        index,
+    });
 
     return (
         <SafeAreaView edges={['top']} style={styles.container}>
@@ -144,8 +159,17 @@ export default function HomeScreen() {
                             showsHorizontalScrollIndicator={false}
                             ref={flatListRef}
                             onMomentumScrollEnd={handleScrollEnd}
-                            snapToInterval={screenWidth} // 한 번에 하나의 배너
+                            snapToInterval={screenWidth}
                             decelerationRate="fast"
+                            initialScrollIndex={1}
+                            getItemLayout={getItemLayout}
+                            onScrollToIndexFailed={(info) => {
+                                console.warn("Scroll to index failed:", info);
+                                flatListRef.current?.scrollToIndex({
+                                    index: info.index,
+                                    animated: false,
+                                });
+                            }}
                         />
                     </View>
 
@@ -198,6 +222,13 @@ export default function HomeScreen() {
                         </View>
                     </View>
                 </View>
+
+                {/* 버전 표시 */}
+                <View style={styles.versionContainer}>
+                    <Text style={[styles.versionText, { color: colors.gray300 }]}>
+                        V{pkg.version}-beta
+                    </Text>
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
@@ -240,11 +271,19 @@ const styles = StyleSheet.create({
     bannerContainer: {
         width: screenWidth,
         alignItems: 'center',
-        marginVertical: 10,
     },
     bannerWrapper: {
         width: screenWidth,
+        height: screenWidth * (1 / 3) + 5,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    versionContainer: {
+        alignItems: 'center',
+        marginTop: 20,
+    },
+    versionText: {
+        fontSize: 14,
+        fontWeight: '600',
     },
 });
