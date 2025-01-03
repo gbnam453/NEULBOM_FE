@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image, Text, Linking, Dimensions, Platform } from 'react-native';
+import { StyleSheet, View, ScrollView, Text, Linking, Dimensions, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import ImageModal from 'react-native-image-modal'; // ImageModal 사용
 import colors from '../styles/colors';
-import textStyles from '../styles/textStyles'; // textStyles 가져오기
+import textStyles from '../styles/textStyles';
 import NavigationBar from '../components/Common/NavigationBar';
 import OneByOneButton_V2 from '../components/HomeScreen/OneByOneButton_V2';
 
@@ -63,10 +64,15 @@ export default function DirectionScreen({ navigation }) {
             <NavigationBar title="오시는길" />
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 {/* 스케치 맵 이미지 */}
-                <Image
-                    source={require('../assets/images/DirectionScreen/sketchmap.png')}
-                    style={styles.mapImage}
-                />
+                <View style={styles.imageWrapper}>
+                    <ImageModal
+                        resizeMode="contain"
+                        style={styles.mapImage}
+                        source={require('../assets/images/DirectionScreen/sketchmap.png')}
+                        imageBackgroundColor={colors.gray050}
+                        overlayBackgroundColor={colors.gray050}
+                    />
+                </View>
 
                 {/* 학교 이름 */}
                 <Text style={[textStyles.title22Bold, styles.schoolName]}>
@@ -120,20 +126,20 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 10,
     },
-    schoolName: {
-        marginTop: 10, // 학교 이름 아래 여백
-        textAlign: 'center',
-        color: colors.gray900,
+    imageWrapper: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: adjustedWidth,
     },
     mapImage: {
         width: adjustedWidth,
-        height: adjustedWidth * 0.8,
+        height: adjustedWidth * (1400 / 1600), // 원본 비율 유지
         borderRadius: 16,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-        elevation: 1,
+    },
+    schoolName: {
+        marginTop: 10,
+        textAlign: 'center',
+        color: colors.gray900,
     },
     addressText: {
         marginTop: 10,

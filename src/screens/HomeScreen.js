@@ -210,7 +210,7 @@ export default function HomeScreen() {
                         </View>
                     </View>
 
-                    {/* 인사말 */}
+                    {/*
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
                             <ThreeByOneButton
@@ -221,6 +221,7 @@ export default function HomeScreen() {
                             />
                         </View>
                     </View>
+                    */}
                 </View>
 
                 {/* 버전 표시 */}
