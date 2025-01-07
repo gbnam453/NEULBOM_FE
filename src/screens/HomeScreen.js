@@ -3,6 +3,7 @@ import { View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking, FlatLis
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
 import colors from '../styles/colors';
+import textStyles from '../styles/textStyles';
 import { useNavigation } from '@react-navigation/native';
 import NoticeButton from '../components/HomeScreen/NoticeButton';
 import Banner from '../components/HomeScreen/Banner';
@@ -212,7 +213,7 @@ export default function HomeScreen() {
 
                 {/* 버전 표시 */}
                 <View style={styles.versionContainer}>
-                    <Text style={[styles.versionText, { color: colors.gray300 }]}>
+                    <Text style={[textStyles.subtitle12Bold14, styles.versionText, { color: colors.gray300 }]}>
                         V{pkg.version}-beta
                     </Text>
                 </View>
