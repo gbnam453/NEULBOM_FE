@@ -70,7 +70,7 @@ export default function DirectionScreen({ navigation }) {
                         style={styles.mapImage}
                         source={require('../assets/images/DirectionScreen/sketchmap.png')}
                         imageBackgroundColor={colors.gray050}
-                        overlayBackgroundColor={colors.gray050}
+                        overlayBackgroundColor={'black'}
                     />
                 </View>
 
