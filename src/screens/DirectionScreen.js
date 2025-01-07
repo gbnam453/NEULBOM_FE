@@ -152,12 +152,13 @@ const styles = StyleSheet.create({
         borderRadius: 16,
     },
     schoolName: {
-        marginTop: 10,
+        marginTop: 20,
         textAlign: 'center',
         color: colors.gray900,
     },
     addressText: {
         marginTop: 10,
+        marginBottom: 14,
         fontSize: 14,
         fontWeight: '600',
         color: colors.gray700,
@@ -167,7 +168,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        marginTop: 10,
     },
     buttonContainer: {
         margin: 5,
