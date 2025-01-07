@@ -6,8 +6,13 @@ import colors from '../styles/colors';
 import textStyles from '../styles/textStyles';
 import NavigationBar from '../components/Common/NavigationBar';
 import OneByOneButton_V2 from '../components/HomeScreen/OneByOneButton_V2';
+import ThreeByOneButton from '../components/HomeScreen/ThreeByOneButton';
 
 export default function DirectionScreen({ navigation }) {
+
+    const navigateToScreen = (screenName) => {
+        navigation.navigate(screenName);
+    };
     const openKakaoMap = () => {
         const url = 'kakaomap://place?id=893613647';
         Linking.canOpenURL(url)
@@ -105,6 +110,16 @@ export default function DirectionScreen({ navigation }) {
                             title="티맵"
                             imageSource={require('../assets/images/DirectionScreen/tmap.png')}
                             onPress={openTMap}
+                        />
+                    </View>
+                </View>
+                <View style={styles.row}>
+                    <View style={styles.buttonContainer}>
+                        <ThreeByOneButton
+                            title="문의처"
+                            detail="이곳으로 연락해주세요!"
+                            imageSource={require('../assets/images/Buttons/Button_Contact.png')}
+                            onPress={() => navigateToScreen('ContactScreen')}
                         />
                     </View>
                 </View>

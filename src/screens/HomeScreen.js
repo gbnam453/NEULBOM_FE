@@ -164,7 +164,6 @@ export default function HomeScreen() {
                             initialScrollIndex={1}
                             getItemLayout={getItemLayout}
                             onScrollToIndexFailed={(info) => {
-                                console.warn("Scroll to index failed:", info);
                                 flatListRef.current?.scrollToIndex({
                                     index: info.index,
                                     animated: false,
@@ -204,7 +203,7 @@ export default function HomeScreen() {
                             <ThreeByOneButton
                                 title="문의처"
                                 detail="이곳으로 연락해주세요!"
-                                imageSource={require('../assets/images/Buttons/Button_Notice.png')}
+                                imageSource={require('../assets/images/Buttons/Button_Contact.png')}
                                 onPress={() => navigateToScreen('ContactScreen')}
                             />
                         </View>
