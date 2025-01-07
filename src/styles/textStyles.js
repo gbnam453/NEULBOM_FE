@@ -3,7 +3,7 @@ import fonts from './fonts';
 
 export default StyleSheet.create({
   // Title
-  title24Bold: {
+  title36Bold: {
     fontFamily: fonts.bold,
     fontSize: 36,
     lineHeight: 38,

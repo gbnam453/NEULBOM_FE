@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     image: {
         width: adjustedWidth * (1 / 4), // 버튼 가로 크기의 10%
         height: adjustedWidth * (1 / 4), // 버튼 높이에 맞춤
+        MarginRight: 12, // 왼쪽 여백
         resizeMode: 'contain', // 이미지 비율 유지하며 맞춤
-        marginRight: 20,
     },
 });
