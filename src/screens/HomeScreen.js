@@ -208,19 +208,6 @@ export default function HomeScreen() {
                             />
                         </View>
                     </View>
-
-                    {/*
-                    <View style={styles.row}>
-                        <View style={styles.buttonContainer}>
-                            <ThreeByOneButton
-                                title="인사말"
-                                detail="환영합니다"
-                                imageSource={require('../assets/images/Buttons/Button_Notice.png')}
-                                onPress={() => navigateToScreen('WelcomeMessageScreen')}
-                            />
-                        </View>
-                    </View>
-                    */}
                 </View>
 
                 {/* 버전 표시 */}
