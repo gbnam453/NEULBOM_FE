@@ -1,12 +1,13 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Dimensions } from 'react-native';
+import { Linking } from 'react-native';
 import textStyles from '../../styles/textStyles'; // textStyles 가져오기
 import colors from '../../styles/colors'; // colors 가져오기
 
-export default function DownloadListButton({ title, date, link, navigation, color = 'white' }) {
+export default function DownloadListButton({ title, date, link, color = 'white' }) {
     const handlePress = () => {
         if (link) {
-            navigation.navigate('WebViewScreen', { url: link }); // WebViewScreen으로 이동
+            Linking.openURL(link); // 링크를 기본 브라우저에서 열기
         }
     };
 
