@@ -214,7 +214,7 @@ export default function HomeScreen() {
                 {/* 버전 표시 */}
                 <View style={styles.versionContainer}>
                     <Text style={[textStyles.subtitle12Bold14, styles.versionText, { color: colors.gray300 }]}>
-                        V{pkg.version}-beta
+                        {pkg.version}
                     </Text>
                 </View>
             </ScrollView>
