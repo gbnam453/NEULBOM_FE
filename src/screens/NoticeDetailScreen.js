@@ -15,11 +15,11 @@ export default function NoticeDetailScreen({ route }) {
             {/* 공지사항 상세 내용 */}
             <ScrollView contentContainerStyle={styles.content}>
                 <View style={styles.titleContainer}>
-                    <Text style={textStyles.title22Bold}>{title}</Text>
-                    <Text style={styles.date}>{date}</Text>
+                    <Text style={textStyles.title18Bold}>{title}</Text>
+                    <Text style={[textStyles.title14Bold, styles.date]}>{date}</Text>
                 </View>
                 <View style={styles.detailContainer}>
-                    <Text style={styles.detail}>{detail}</Text>
+                    <Text style={[textStyles.title16SemiBold, styles.detail]}>{detail}</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -35,22 +35,19 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     titleContainer: {
-        marginBottom: 20,
+        marginBottom: 0,
         borderBottomWidth: 1,
         borderBottomColor: colors.gray300,
-        paddingBottom: 10,
+        paddingBottom: 20,
     },
     date: {
-        marginTop: 10,
-        fontSize: 14,
+        marginTop: 5,
         color: colors.gray700,
     },
     detailContainer: {
         marginTop: 20,
     },
     detail: {
-        fontSize: 16,
-        lineHeight: 24,
         color: colors.gray900,
     },
 });
