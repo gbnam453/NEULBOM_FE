@@ -1,5 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking, FlatList, Dimensions, Text } from 'react-native';
+import {
+    View,
+    Image,
+    StyleSheet,
+    TouchableOpacity,
+    ScrollView,
+    Linking,
+    FlatList,
+    Dimensions,
+    Text,
+    Alert,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
 import colors from '../styles/colors';
@@ -20,6 +31,35 @@ export default function HomeScreen() {
     const navigation = useNavigation();
     const flatListRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(1);
+    const [mainNotice, setMainNotice] = useState(null);
+
+    // 공지사항 데이터를 가져오는 함수
+    useEffect(() => {
+        fetch('http://gbnam453.iptime.org:8080/neulbom/api/mainnotice')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => setMainNotice(data[0])) // 첫 번째 데이터만 설정
+            .catch((error) => console.error('Failed to fetch main notice:', error));
+    }, []);
+
+    // 상세 화면으로 이동
+    const navigateToDetail = () => {
+        if (mainNotice) {
+            navigation.navigate('NoticeDetailScreen', {
+                title: mainNotice.title,
+                date: mainNotice.date,
+                detail: mainNotice.detail,
+            });
+        }
+    };
+
+    const CloseFeature = () => {
+        Alert.alert("알림", "아직 공개되지 않은 기능이에요.", [{ text: "확인" }]);
+    };
 
     const banners = [
         require('../assets/images/Banner/Banner_Education.png'),
@@ -86,17 +126,24 @@ export default function HomeScreen() {
                     source={require('../assets/images/Icons/Icon_Neulbom.png')}
                     style={styles.icon}
                 />
-                <TouchableOpacity onPress={() => navigateToScreen('NotificationScreen')}>
+                <TouchableOpacity onPress={CloseFeature}>
                     <ButtonIcon width={24} height={24} />
                 </TouchableOpacity>
             </View>
 
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.buttonWrapper}>
-                    {/* 중요공지 */}
+                    {/* 중요 공지 */}
                     <View style={styles.row}>
                         <View style={styles.buttonContainer}>
-                            <NoticeButton title="이곳에 중요 공지가 표시될 예정이예요." />
+                            {mainNotice ? (
+                                <NoticeButton
+                                    title={mainNotice.title} // 공지사항 제목만 표시
+                                    onPress={navigateToDetail} // 상세 화면으로 이동
+                                />
+                            ) : (
+                                <NoticeButton title="공지사항을 불러오는 중입니다..." />
+                            )}
                         </View>
                     </View>
 
@@ -121,7 +168,7 @@ export default function HomeScreen() {
                                 <OneByOneButton
                                     title="학사일정"
                                     imageSource={require('../assets/images/Buttons/Button_Schedule.png')}
-                                    onPress={() => navigateToScreen('ScheduleScreen')}
+                                    onPress={CloseFeature}
                                 />
                             </View>
                         </View>
@@ -214,7 +261,7 @@ export default function HomeScreen() {
                 {/* 버전 표시 */}
                 <View style={styles.versionContainer}>
                     <Text style={[textStyles.subtitle12Bold14, styles.versionText, { color: colors.gray300 }]}>
-                        V{pkg.version}-beta
+                        {pkg.version}
                     </Text>
                 </View>
             </ScrollView>

@@ -16,7 +16,7 @@ const NavigationBar = ({ title }) => {
                 <ButtonBack width={24} height={24} />
             </TouchableOpacity>
             {/* 타이틀 */}
-            <Text style={[styles.title, textStyles.title22Bold]}>{title}</Text>
+            <Text style={[textStyles.title22Bold, styles.title]}>{title}</Text>
         </View>
     );
 };
@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
     },
     title: {
         marginLeft: 30, // 아이콘 오른쪽 여백
+        marginTop: 1, // 아이콘 오른쪽 여백
         fontSize: 22,
-        fontWeight: 'bold',
         textAlign: 'center',
         color: '#000', // 필요에 따라 수정
     },

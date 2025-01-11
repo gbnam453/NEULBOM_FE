@@ -1,30 +1,20 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Dimensions } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // 네비게이션 훅
 import textStyles from '../../styles/textStyles'; // textStyles 가져오기
 import colors from '../../styles/colors'; // colors 가져오기
 
-export default function NoticeListButton({ title, date, detail, color = 'white' }) {
-    const navigation = useNavigation(); // 네비게이션 객체 가져오기
-
+export default function UploadListButton({ title, date, link, navigation, color = 'white' }) {
     const handlePress = () => {
-        // NoticeDetailScreen으로 데이터 전달하며 이동
-        navigation.navigate('NoticeDetailScreen', { title, date, detail });
+        if (link) {
+            navigation.navigate('WebViewScreen', { url: link }); // WebViewScreen으로 이동
+        }
     };
 
     return (
-        <TouchableOpacity
-            style={[styles.button, { backgroundColor: color }]}
-            onPress={handlePress}
-        >
+        <TouchableOpacity style={[styles.button, { backgroundColor: color }]} onPress={handlePress}>
             <View style={styles.titleContainer}>
                 <Text style={textStyles.title22Bold}>{title}</Text>
-                <Text
-                    style={[
-                        textStyles.subtitle14SemiBold16,
-                        { color: colors.gray700, marginTop: 6 },
-                    ]}
-                >
+                <Text style={[textStyles.subtitle14SemiBold16, { color: colors.gray700, marginTop: 6 }]}>
                     {date} {/* 날짜 값 표시 */}
                 </Text>
             </View>

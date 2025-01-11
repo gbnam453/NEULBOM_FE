@@ -3,10 +3,9 @@ import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Alert } from 're
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../styles/colors'; // 색상 파일 import
 import NavigationBar from '../components/Common/NavigationBar'; // NavigationBar import
-import NoticeListButton from '../components/NoticeScreen/NoticeListButton';
-import NoticeAddButton from '../components/NoticeScreen/NoticeAddButton';
+import DownloadListButton from '../components/UploadScreen/UploadListButton';
 
-export default function DownloadScreen({ navigation }) {
+export default function UploadScreen({ navigation }) {
     const [notices, setNotices] = useState([]); // 공지사항 데이터를 저장할 상태
     const [loading, setLoading] = useState(true); // 데이터 로딩 상태
 
@@ -23,32 +22,6 @@ export default function DownloadScreen({ navigation }) {
                 setLoading(false);
             });
     }, []);
-
-    // 새로운 공지사항을 추가하는 함수
-    const addNotice = () => {
-        const newNotice = {
-            title: '새로운 서류제출',
-            description: '새로운 서류제출의 내용입니다.',
-            date: '2024-12-31',
-        };
-
-        fetch('http://gbnam453.iptime.org:8080/neulbom/api/upload', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newNotice),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setNotices((prevNotices) => [...prevNotices, data]); // 새로운 공지사항을 notices 상태에 추가
-                Alert.alert('서류제출 추가', '새로운 서류제출이 추가되었습니다.');
-            })
-            .catch((error) => {
-                console.error('Error adding notice:', error);
-                Alert.alert('에러', '서류제출을 추가하는 데 실패했습니다.');
-            });
-    };
 
     // 로딩 중일 때는 로딩 인디케이터 표시
     if (loading) {
@@ -67,14 +40,16 @@ export default function DownloadScreen({ navigation }) {
             {/* 스크롤 가능한 화면 내용 */}
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 <View style={styles.row}>
-                    {notices.map((notice) => (
-                        <View key={notice.id} style={styles.buttonContainer}>
-                            <NoticeListButton title={notice.title} date={notice.date} />
+                    {notices.map((notice, index) => (
+                        <View key={notice.id || index} style={styles.buttonContainer}>
+                            <DownloadListButton
+                                title={notice.title}
+                                date={notice.date}
+                                link={notice.link} // link 전달
+                                navigation={navigation} // navigation 전달
+                            />
                         </View>
                     ))}
-                </View>
-                <View style={styles.buttonContainer}>
-                    <NoticeAddButton onPress={addNotice} /> {/* NoticeAddButton에 addNotice 함수 전달 */}
                 </View>
             </ScrollView>
         </SafeAreaView>

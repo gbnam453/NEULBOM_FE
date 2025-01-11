@@ -12,6 +12,8 @@ import DirectionScreen from './screens/DirectionScreen';
 import WelcomeMessageScreen from './screens/WelcomeMessageScreen';
 import ContactScreen from './screens/ContactScreen';
 import DownloadScreen from './screens/DownloadScreen';
+import WebViewScreen from './screens/WebViewScreen';
+import NoticeDetailScreen from './screens/NoticeDetailScreen';
 
 enableScreens();
 
@@ -31,6 +33,8 @@ export default function App() {
                 <Stack.Screen name="DirectionScreen" component={DirectionScreen} options={{ headerShown: false }}/>
                 <Stack.Screen name="WelcomeMessageScreen" component={WelcomeMessageScreen} options={{ headerShown: false }}/>
                 <Stack.Screen name="ContactScreen" component={ContactScreen} options={{ headerShown: false }}/>
+                <Stack.Screen name="WebViewScreen" component={WebViewScreen} options={{ headerShown: false }}/>
+                <Stack.Screen name="NoticeDetailScreen" component={NoticeDetailScreen} options={{ headerShown: false }}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
