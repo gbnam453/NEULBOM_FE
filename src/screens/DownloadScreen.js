@@ -40,8 +40,8 @@ export default function DownloadScreen({ navigation }) {
             {/* 스크롤 가능한 화면 내용 */}
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 <View style={styles.row}>
-                    {notices.map((notice) => (
-                        <View key={notice.id} style={styles.buttonContainer}>
+                    {notices.map((notice, index) => (
+                        <View key={notice.id || index} style={styles.buttonContainer}>
                             <DownloadListButton
                                 title={notice.title}
                                 date={notice.date}

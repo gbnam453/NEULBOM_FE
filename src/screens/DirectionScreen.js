@@ -48,7 +48,7 @@ export default function DirectionScreen({ navigation }) {
     };
 
     const openTMap = () => {
-        const url = 'tmap://route?goalname=호서대학교 KTX캠퍼스&goalx=127.123456&goaly=36.123456';
+        const url = 'tmap://route?goalname=호서대학교 KTX캠퍼스&goalx=127.1075597136932&goaly=36.79069421400222';
         Linking.canOpenURL(url)
             .then((supported) => {
                 if (supported) {

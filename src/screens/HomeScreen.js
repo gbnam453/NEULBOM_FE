@@ -1,5 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking, FlatList, Dimensions, Text } from 'react-native';
+import {
+    View,
+    Image,
+    StyleSheet,
+    TouchableOpacity,
+    ScrollView,
+    Linking,
+    FlatList,
+    Dimensions,
+    Text,
+    Alert,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
 import colors from '../styles/colors';
@@ -20,6 +31,10 @@ export default function HomeScreen() {
     const navigation = useNavigation();
     const flatListRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(1);
+
+    const CloseFeature = () => {
+        Alert.alert("알림", "아직 공개되지 않은 기능이에요.", [{ text: "확인" }]);
+    };
 
     const banners = [
         require('../assets/images/Banner/Banner_Education.png'),
@@ -86,7 +101,7 @@ export default function HomeScreen() {
                     source={require('../assets/images/Icons/Icon_Neulbom.png')}
                     style={styles.icon}
                 />
-                <TouchableOpacity onPress={() => navigateToScreen('NotificationScreen')}>
+                <TouchableOpacity onPress={CloseFeature}>
                     <ButtonIcon width={24} height={24} />
                 </TouchableOpacity>
             </View>
@@ -121,7 +136,7 @@ export default function HomeScreen() {
                                 <OneByOneButton
                                     title="학사일정"
                                     imageSource={require('../assets/images/Buttons/Button_Schedule.png')}
-                                    onPress={() => navigateToScreen('ScheduleScreen')}
+                                    onPress={CloseFeature}
                                 />
                             </View>
                         </View>
