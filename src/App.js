@@ -23,7 +23,9 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
+
                 <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }}/>
+
                 <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }}/>
                 <Stack.Screen name="NotificationScreen" component={NotificationScreen} options={{ headerShown: false }}/>
                 <Stack.Screen name="NoticeScreen" component={NoticeScreen} options={{ headerShown: false }}/>
