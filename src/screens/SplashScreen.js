@@ -16,7 +16,7 @@ export default function SplashScreen() {
     return (
         <View style={styles.container}>
             <Image
-                source={require('../assets/images/Icons/Icon_Neulbom_Splash.png')} // 이미지 경로
+                source={require('../assets/images/Icons/Icon_Neulbom_Splash.webp')} // 이미지 경로
                 style={styles.icon}
             />
         </View>
