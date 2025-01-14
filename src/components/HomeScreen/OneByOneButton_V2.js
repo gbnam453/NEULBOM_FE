@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
     image: {
         width: adjustedWidth * 0.15, // 이미지 크기
         height: adjustedWidth * 0.15, // 이미지 크기
-        borderRadius: 8, // 이미지 모서리 둥글게
+        borderRadius: 12, // 이미지 모서리 둥글게
     },
 });
