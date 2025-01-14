@@ -22,7 +22,7 @@ export default function ContactScreen({ navigation }) {
                     <ThreeByOneButton
                         title="전화"
                         detail="041-423-2415"
-                        imageSource={require('../assets/images/Icons/Icon_Phone.png')} // PNG 사용
+                        imageSource={require('../assets/images/Icons/Icon_Phone.webp')} // PNG 사용
                         onPress={() => Linking.openURL('tel:041-423-2415')}
                     />
                 </View>
@@ -30,7 +30,7 @@ export default function ContactScreen({ navigation }) {
                     <ThreeByOneButton
                         title="전화"
                         detail="041-423-2416"
-                        imageSource={require('../assets/images/Icons/Icon_Phone.png')} // PNG 사용
+                        imageSource={require('../assets/images/Icons/Icon_Phone.webp')} // PNG 사용
                         onPress={() => Linking.openURL('tel:041-423-2416')}
                     />
                 </View>
@@ -38,7 +38,7 @@ export default function ContactScreen({ navigation }) {
                     <ThreeByOneButton
                         title="이메일"
                         detail="neul2bom2@gmail.com"
-                        imageSource={require('../assets/images/Icons/Icon_Email.png')} // PNG 사용
+                        imageSource={require('../assets/images/Icons/Icon_Email.webp')} // PNG 사용
                         onPress={() => Linking.openURL('mailto:neul2bom2@gmail.com')}
                     />
                 </View>

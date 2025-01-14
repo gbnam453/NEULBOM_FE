@@ -8,7 +8,7 @@ export default function SplashScreen() {
     useEffect(() => {
         const timer = setTimeout(() => {
             navigation.replace('HomeScreen'); // 3초 후 'HomeScreen'으로 이동
-        }, 2000); // 3초 대기
+        }, 1000); // 3초 대기
 
         return () => clearTimeout(timer); // 컴포넌트가 unmount될 때 타이머를 정리
     }, [navigation]);
@@ -16,7 +16,7 @@ export default function SplashScreen() {
     return (
         <View style={styles.container}>
             <Image
-                source={require('../assets/images/Icons/Icon_Neulbom_Splash.png')} // 이미지 경로
+                source={require('../assets/images/Icons/Icon_Neulbom_Splash.webp')} // 이미지 경로
                 style={styles.icon}
             />
         </View>

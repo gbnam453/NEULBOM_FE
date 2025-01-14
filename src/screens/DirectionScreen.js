@@ -94,21 +94,21 @@ export default function DirectionScreen({ navigation }) {
                     <View style={styles.buttonContainer}>
                         <OneByOneButton_V2
                             title="네이버 지도"
-                            imageSource={require('../assets/images/DirectionScreen/navermap.png')}
+                            imageSource={require('../assets/images/DirectionScreen/navermap.webp')}
                             onPress={openNaverMap}
                         />
                     </View>
                     <View style={styles.buttonContainer}>
                         <OneByOneButton_V2
                             title="카카오맵"
-                            imageSource={require('../assets/images/DirectionScreen/kakaomap.png')}
+                            imageSource={require('../assets/images/DirectionScreen/kakaomap.webp')}
                             onPress={openKakaoMap}
                         />
                     </View>
                     <View style={styles.buttonContainer}>
                         <OneByOneButton_V2
                             title="티맵"
-                            imageSource={require('../assets/images/DirectionScreen/tmap.png')}
+                            imageSource={require('../assets/images/DirectionScreen/tmap.webp')}
                             onPress={openTMap}
                         />
                     </View>
@@ -118,7 +118,7 @@ export default function DirectionScreen({ navigation }) {
                         <ThreeByOneButton
                             title="문의처"
                             detail="이곳으로 연락해주세요!"
-                            imageSource={require('../assets/images/Buttons/Button_Contact.png')}
+                            imageSource={require('../assets/images/Buttons/Button_Contact.webp')}
                             onPress={() => navigateToScreen('ContactScreen')}
                         />
                     </View>

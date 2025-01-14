@@ -58,14 +58,14 @@ export default function HomeScreen() {
     };
 
     const CloseFeature = () => {
-        Alert.alert("알림", "아직 공개되지 않은 기능이에요.", [{ text: "확인" }]);
+        Alert.alert('알림', '아직 공개되지 않은 기능이에요.', [{ text: '확인' }]);
     };
 
     const banners = [
-        require('../assets/images/Banner/Banner_Education.png'),
-        require('../assets/images/Banner/Banner_KoreaScience.png'),
-        require('../assets/images/Banner/Banner_HoseoUniv.png'),
-        require('../assets/images/Banner/Banner_Neulbom.png'),
+        require('../assets/images/Banner/Banner_Education.webp'),
+        require('../assets/images/Banner/Banner_KoreaScience.webp'),
+        require('../assets/images/Banner/Banner_HoseoUniv.webp'),
+        require('../assets/images/Banner/Banner_Neulbom.webp'),
     ];
 
     const infiniteBanners = [banners[banners.length - 1], ...banners, banners[0]];
@@ -123,7 +123,7 @@ export default function HomeScreen() {
         <SafeAreaView edges={['top']} style={styles.container}>
             <View style={styles.shadowBox}>
                 <Image
-                    source={require('../assets/images/Icons/Icon_Neulbom.png')}
+                    source={require('../assets/images/Icons/Icon_Neulbom.webp')}
                     style={styles.icon}
                 />
                 <TouchableOpacity onPress={CloseFeature}>
@@ -152,7 +152,7 @@ export default function HomeScreen() {
                         <View style={styles.buttonContainer}>
                             <TwoByTwoButton
                                 title="수업자료"
-                                imageSource={require('../assets/images/Buttons/Button_Download.png')}
+                                imageSource={require('../assets/images/Buttons/Button_Download.webp')}
                                 onPress={() => navigateToScreen('DownloadScreen')}
                             />
                         </View>
@@ -160,14 +160,14 @@ export default function HomeScreen() {
                             <View style={styles.buttonContainer}>
                                 <OneByOneButton
                                     title="공지사항"
-                                    imageSource={require('../assets/images/Buttons/Button_Notice.png')}
+                                    imageSource={require('../assets/images/Buttons/Button_Notice.webp')}
                                     onPress={() => navigateToScreen('NoticeScreen')}
                                 />
                             </View>
                             <View style={styles.buttonContainer}>
                                 <OneByOneButton
                                     title="학사일정"
-                                    imageSource={require('../assets/images/Buttons/Button_Schedule.png')}
+                                    imageSource={require('../assets/images/Buttons/Button_Schedule.webp')}
                                     onPress={CloseFeature}
                                 />
                             </View>
@@ -179,14 +179,14 @@ export default function HomeScreen() {
                         <View style={styles.buttonContainer}>
                             <TwoByOneButton
                                 title="서류제출"
-                                imageSource={require('../assets/images/Buttons/Button_Upload.png')}
+                                imageSource={require('../assets/images/Buttons/Button_Upload.webp')}
                                 onPress={() => navigateToScreen('UploadScreen')}
                             />
                         </View>
                         <View style={styles.buttonContainer}>
                             <OneByOneButton
                                 title="오시는길"
-                                imageSource={require('../assets/images/Buttons/Button_Direction.png')}
+                                imageSource={require('../assets/images/Buttons/Button_Direction.webp')}
                                 onPress={() => navigateToScreen('DirectionScreen')}
                             />
                         </View>
@@ -225,21 +225,21 @@ export default function HomeScreen() {
                         <View style={styles.buttonContainer}>
                             <OneByOneButton_V2
                                 title="유튜브"
-                                imageSource={require('../assets/images/Icons/Icon_YouTube.png')}
+                                imageSource={require('../assets/images/Icons/Icon_YouTube.webp')}
                                 onPress={() => openURL('https://www.youtube.com/@neul2bom2/featured')}
                             />
                         </View>
                         <View style={styles.buttonContainer}>
                             <OneByOneButton_V2
                                 title="인스타그램"
-                                imageSource={require('../assets/images/Icons/Icon_Instagram.png')}
+                                imageSource={require('../assets/images/Icons/Icon_Instagram.webp')}
                                 onPress={() => openURL('https://www.instagram.com/neul2bom2')}
                             />
                         </View>
                         <View style={styles.buttonContainer}>
                             <OneByOneButton_V2
                                 title="페이스북"
-                                imageSource={require('../assets/images/Icons/Icon_Facebook.png')}
+                                imageSource={require('../assets/images/Icons/Icon_Facebook.webp')}
                                 onPress={() => openURL('https://www.facebook.com/people/늘봄/61553601422680/')}
                             />
                         </View>
@@ -251,7 +251,7 @@ export default function HomeScreen() {
                             <ThreeByOneButton
                                 title="문의처"
                                 detail="이곳으로 연락해주세요!"
-                                imageSource={require('../assets/images/Buttons/Button_Contact.png')}
+                                imageSource={require('../assets/images/Buttons/Button_Contact.webp')}
                                 onPress={() => navigateToScreen('ContactScreen')}
                             />
                         </View>
