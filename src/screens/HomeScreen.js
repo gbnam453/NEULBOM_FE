@@ -166,9 +166,9 @@ export default function HomeScreen() {
                             </View>
                             <View style={styles.buttonContainer}>
                                 <OneByOneButton
-                                    title="학사일정"
-                                    imageSource={require('../assets/images/Buttons/Button_Schedule.webp')}
-                                    onPress={CloseFeature}
+                                    title="문의처"
+                                    imageSource={require('../assets/images/Buttons/Button_Contact.webp')}
+                                    onPress={() => navigateToScreen('ContactScreen')}
                                 />
                             </View>
                         </View>
@@ -190,34 +190,6 @@ export default function HomeScreen() {
                                 onPress={() => navigateToScreen('DirectionScreen')}
                             />
                         </View>
-                    </View>
-
-                    {/* 배너 */}
-                    <View style={styles.bannerContainer}>
-                        <FlatList
-                            data={infiniteBanners}
-                            keyExtractor={(_, index) => index.toString()}
-                            renderItem={({ item }) => (
-                                <View style={styles.bannerWrapper}>
-                                    <Banner imageSource={item} />
-                                </View>
-                            )}
-                            horizontal
-                            pagingEnabled
-                            showsHorizontalScrollIndicator={false}
-                            ref={flatListRef}
-                            onMomentumScrollEnd={handleScrollEnd}
-                            snapToInterval={screenWidth}
-                            decelerationRate="fast"
-                            initialScrollIndex={1}
-                            getItemLayout={getItemLayout}
-                            onScrollToIndexFailed={(info) => {
-                                flatListRef.current?.scrollToIndex({
-                                    index: info.index,
-                                    animated: false,
-                                });
-                            }}
-                        />
                     </View>
 
                     {/* SNS */}
@@ -244,18 +216,34 @@ export default function HomeScreen() {
                             />
                         </View>
                     </View>
+                </View>
 
-                    {/* 문의처 */}
-                    <View style={styles.row}>
-                        <View style={styles.buttonContainer}>
-                            <ThreeByOneButton
-                                title="문의처"
-                                detail="이곳으로 연락해주세요!"
-                                imageSource={require('../assets/images/Buttons/Button_Contact.webp')}
-                                onPress={() => navigateToScreen('ContactScreen')}
-                            />
-                        </View>
-                    </View>
+                {/* 배너 */}
+                <View style={styles.bannerContainer}>
+                    <FlatList
+                        data={infiniteBanners}
+                        keyExtractor={(_, index) => index.toString()}
+                        renderItem={({ item }) => (
+                            <View style={styles.bannerWrapper}>
+                                <Banner imageSource={item} />
+                            </View>
+                        )}
+                        horizontal
+                        pagingEnabled
+                        showsHorizontalScrollIndicator={false}
+                        ref={flatListRef}
+                        onMomentumScrollEnd={handleScrollEnd}
+                        snapToInterval={screenWidth}
+                        decelerationRate="fast"
+                        initialScrollIndex={1}
+                        getItemLayout={getItemLayout}
+                        onScrollToIndexFailed={(info) => {
+                            flatListRef.current?.scrollToIndex({
+                                index: info.index,
+                                animated: false,
+                            });
+                        }}
+                    />
                 </View>
 
                 {/* 버전 표시 */}
