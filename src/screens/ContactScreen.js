@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, Text, Linking, Image } from 'react-native';
+import { View, StyleSheet, ScrollView, Text, Linking} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../styles/colors';
 import textStyles from '../styles/textStyles';
 import NavigationBar from '../components/Common/NavigationBar';
 import ThreeByOneButton from '../components/HomeScreen/ThreeByOneButton';
 
-export default function ContactScreen({ navigation }) {
+export default function ContactScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <NavigationBar title="문의처" />
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     title: {
-        ...textStyles.title22Bold,
+        ...textStyles.title20Bold,
         color: colors.gray900,
         textAlign: 'center',
         marginBottom: 20,

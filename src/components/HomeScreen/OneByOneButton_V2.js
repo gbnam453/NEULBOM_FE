@@ -14,7 +14,7 @@ export default function OneByOneButton_V2({ title, onPress, color = 'white', ima
                     />
                 )}
                 <View style={styles.titleContainer}>
-                    <Text style={textStyles.title18Bold}>{title}</Text>
+                    <Text style={textStyles.title16Bold}>{title}</Text>
                 </View>
             </View>
         </TouchableOpacity>

@@ -8,10 +8,20 @@ export default StyleSheet.create({
     fontSize: 36,
     lineHeight: 38,
   },
+  title32Bold: {
+    fontFamily: fonts.bold,
+    fontSize: 32,
+    lineHeight: 34,
+  },
   title22Bold: {
     fontFamily: fonts.bold,
     fontSize: 22,
     lineHeight: 24,
+  },
+  title20Bold: {
+    fontFamily: fonts.bold,
+    fontSize: 20,
+    lineHeight: 22,
   },
   title18Bold: {
     fontFamily: fonts.bold,
@@ -25,6 +35,11 @@ export default StyleSheet.create({
   },
   title16SemiBold: {
     fontFamily: fonts.semiBold,
+    fontSize: 16,
+    lineHeight: 19,
+  },
+  title16Bold: {
+    fontFamily: fonts.bold,
     fontSize: 16,
     lineHeight: 19,
   },

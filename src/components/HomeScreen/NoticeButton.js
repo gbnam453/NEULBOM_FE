@@ -1,18 +1,17 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Dimensions } from 'react-native';
 import textStyles from '../../styles/textStyles';
-import colors from '../../styles/colors'; // textStyles 가져오기
 
 export default function NoticeButton({ title, onPress }) {
     return (
         <TouchableOpacity style={[styles.button, { backgroundColor: '#1E2530' }]} onPress={onPress}>
             {/* 공지 상자 */}
             <View style={styles.noticeBox}>
-                <Text style={[textStyles.title16SemiBold, styles.noticeText]}>공지</Text>
+                <Text style={[textStyles.title14Bold, styles.noticeText]}>공지</Text>
             </View>
             {/* 기존 텍스트 */}
             <View style={styles.titleContainer}>
-                <Text style={[textStyles.title16SemiBold, styles.whiteText]}>{title}</Text>
+                <Text style={[textStyles.title14Bold, styles.whiteText]}>{title}</Text>
             </View>
         </TouchableOpacity>
     );

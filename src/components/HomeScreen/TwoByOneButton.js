@@ -6,7 +6,7 @@ export default function TwoByOneButton({ title, onPress, color = 'white', imageS
     return (
         <TouchableOpacity style={[styles.button, { backgroundColor: color }]} onPress={onPress}>
             <View style={styles.titleContainer}>
-                <Text style={textStyles.title22Bold}>{title}</Text>
+                <Text style={textStyles.title20Bold}>{title}</Text>
             </View>
             {imageSource && ( // 이미지 경로가 전달되었을 경우에만 렌더링
                 <Image
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start', // 버튼 내용 왼쪽 상단으로 정렬
         alignItems: 'flex-start', // 텍스트를 왼쪽으로 정렬
         paddingLeft: 12, // 왼쪽 여백 12px
-        paddingTop: 16, // 위쪽 여백 16px
+        paddingTop: 14, // 위쪽 여백 16px
         elevation: 2, // 약간의 엘리베이션 효과
         shadowColor: '#000', // 그림자 색상
         shadowOffset: { width: 0, height: 2 }, // 그림자 위치

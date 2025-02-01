@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { enableScreens } from 'react-native-screens';
@@ -18,6 +19,14 @@ import NoticeDetailScreen from './screens/NoticeDetailScreen';
 enableScreens();
 
 const Stack = createStackNavigator();
+
+// Text 적용
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
+
+// TextInput 적용
+TextInput.defaultProps = TextInput.defaultProps || {};
+TextInput.defaultProps.allowFontScaling = false;
 
 export default function App() {
     return (
