@@ -30,6 +30,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
     },
     backButton: {
+        width: 30,
+        height: 52,
         position: 'absolute',
         left: 12,
         justifyContent: 'center',
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
     },
     title: {
         marginLeft: 30, // 아이콘 오른쪽 여백
-        marginTop: 1, // 아이콘 오른쪽 여백
+        marginTop: 2, // 아이콘 오른쪽 여백
         fontSize: 22,
         textAlign: 'center',
         color: '#000', // 필요에 따라 수정

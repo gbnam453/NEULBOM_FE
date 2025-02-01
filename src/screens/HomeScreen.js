@@ -21,6 +21,7 @@ import Banner from '../components/HomeScreen/Banner';
 import OneByOneButton from '../components/HomeScreen/OneByOneButton';
 import TwoByOneButton from '../components/HomeScreen/TwoByOneButton';
 import ThreeByOneButton from '../components/HomeScreen/ThreeByOneButton';
+import ThreeByOneButton_V2 from '../components/HomeScreen/ThreeByOneButton_V2';
 import TwoByTwoButton from '../components/HomeScreen/TwoByTwoButton';
 import OneByOneButton_V2 from '../components/HomeScreen/OneByOneButton_V2';
 import pkg from '../../package.json'; // 버전 정보 가져오기
