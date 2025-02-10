@@ -42,6 +42,11 @@ export default function ContactScreen() {
                         onPress={() => Linking.openURL('mailto:neul2bom2@gmail.com')}
                     />
                 </View>
+                <View style={styles.feedbackContainer}>
+                    <Text style={styles.feedbackText} onPress={() => Linking.openURL('mailto:gbnam453@gmail.com')}>
+                        앱에 관한 의견 보내기
+                    </Text>
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
@@ -65,5 +70,14 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginBottom: 10,
+    },
+    feedbackContainer: {
+        marginTop: 20, // 상단 여백
+        alignItems: 'center',
+    },
+    feedbackText: {
+        ...textStyles.title16Bold,
+        color: colors.gray900,
+        textDecorationLine: 'underline', // 밑줄 효과
     },
 });

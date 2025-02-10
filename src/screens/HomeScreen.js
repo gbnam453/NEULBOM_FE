@@ -42,8 +42,8 @@ export default function HomeScreen() {
             ToastAndroid.show('인터넷이 연결되어 있지 않아요', ToastAndroid.SHORT);
         } else {
             Alert.alert(
-                '인터넷 연결 오류',
-                '인터넷이 연결되어 있지 않아요. 연결 상태를 확인해주세요.',
+                '네트워크 상태 확인',
+                '인터넷이 연결되어 있지 않아요.',
                 [{ text: '확인' }]
             );
         }
