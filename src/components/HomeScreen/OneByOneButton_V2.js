@@ -2,18 +2,20 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Dimensions, Image } from 'react-native';
 import textStyles from '../../styles/textStyles'; // textStyles 가져오기
 
-export default function OneByOneButton_V2({ title, onPress, color = 'white', imageSource }) { // 기본값 'white'
+export default function OneByOneButton_V2({ title, onPress, color = 'white', imageSource }) {
     return (
         <TouchableOpacity style={[styles.button, { backgroundColor: color }]} onPress={onPress}>
-            {imageSource && ( // 이미지 경로가 전달되었을 경우에만 렌더링
-                <Image
-                    source={imageSource}
-                    style={styles.image}
-                    resizeMode="contain"
-                />
-            )}
-            <View style={styles.titleContainer}>
-                <Text style={textStyles.title18Bold}>{title}</Text>
+            <View style={styles.contentContainer}>
+                {imageSource && ( // 이미지 경로가 전달되었을 경우에만 렌더링
+                    <Image
+                        source={imageSource}
+                        style={styles.image}
+                        resizeMode="contain"
+                    />
+                )}
+                <View style={styles.titleContainer}>
+                    <Text style={textStyles.title16Bold}>{title}</Text>
+                </View>
             </View>
         </TouchableOpacity>
     );
@@ -27,19 +29,23 @@ const styles = StyleSheet.create({
         width: adjustedWidth * (1 / 3),
         height: adjustedWidth * (1 / 3),
         borderRadius: 16, // 네 귀퉁이 둥근 값 16px
-        justifyContent: 'center', // 세로 중앙 정렬
-        alignItems: 'center', // 가로 중앙 정렬
         elevation: 2, // 약간의 엘리베이션 효과
         shadowColor: '#000', // 그림자 색상
         shadowOffset: { width: 0, height: 2 }, // 그림자 위치
         shadowOpacity: 0.1, // 그림자 투명도
         shadowRadius: 3, // 그림자 반경
         paddingVertical: 12, // 상하 여백
+        justifyContent: 'center', // 터치영역 내부 중앙 정렬
+        alignItems: 'center',
+    },
+    contentContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     titleContainer: {
         marginTop: 8, // 이미지와 텍스트 사이 여백
-        justifyContent: 'center', // 텍스트 세로 중앙 정렬
-        alignItems: 'center', // 텍스트 가로 중앙 정렬
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     image: {
         width: adjustedWidth * 0.15, // 이미지 크기

@@ -9,7 +9,7 @@ export default function ThreeByOneButton({ title, detail, onPress, color = 'whit
             <View style={styles.contentContainer}>
                 {/* 텍스트 컨테이너 */}
                 <View style={styles.textContainer}>
-                    <Text style={textStyles.title22Bold}>{title}</Text>
+                    <Text style={textStyles.title20Bold}>{title}</Text>
                     <Text style={[textStyles.subtitle14SemiBold16, { color: colors.gray700 }]}>{detail}</Text>
                 </View>
                 {/* 이미지 */}

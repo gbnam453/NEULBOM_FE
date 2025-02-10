@@ -113,16 +113,6 @@ export default function DirectionScreen({ navigation }) {
                         />
                     </View>
                 </View>
-                <View style={styles.row}>
-                    <View style={styles.buttonContainer}>
-                        <ThreeByOneButton
-                            title="문의처"
-                            detail="이곳으로 연락해주세요!"
-                            imageSource={require('../assets/images/Buttons/Button_Contact.webp')}
-                            onPress={() => navigateToScreen('ContactScreen')}
-                        />
-                    </View>
-                </View>
             </ScrollView>
         </SafeAreaView>
     );

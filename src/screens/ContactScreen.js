@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, Text, Linking, Image } from 'react-native';
+import { View, StyleSheet, ScrollView, Text, Linking} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../styles/colors';
 import textStyles from '../styles/textStyles';
 import NavigationBar from '../components/Common/NavigationBar';
 import ThreeByOneButton from '../components/HomeScreen/ThreeByOneButton';
 
-export default function ContactScreen({ navigation }) {
+export default function ContactScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <NavigationBar title="문의처" />
@@ -42,6 +42,11 @@ export default function ContactScreen({ navigation }) {
                         onPress={() => Linking.openURL('mailto:neul2bom2@gmail.com')}
                     />
                 </View>
+                <View style={styles.feedbackContainer}>
+                    <Text style={styles.feedbackText} onPress={() => Linking.openURL('mailto:gbnam453@gmail.com')}>
+                        앱에 관한 의견 보내기
+                    </Text>
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
@@ -58,12 +63,21 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     title: {
-        ...textStyles.title22Bold,
+        ...textStyles.title20Bold,
         color: colors.gray900,
         textAlign: 'center',
         marginBottom: 20,
     },
     buttonContainer: {
         marginBottom: 10,
+    },
+    feedbackContainer: {
+        marginTop: 20, // 상단 여백
+        alignItems: 'center',
+    },
+    feedbackText: {
+        ...textStyles.title16Bold,
+        color: colors.gray900,
+        textDecorationLine: 'underline', // 밑줄 효과
     },
 });

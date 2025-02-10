@@ -18,7 +18,7 @@ export default function NoticeListButton({ title, date, detail, color = 'white' 
             onPress={handlePress}
         >
             <View style={styles.titleContainer}>
-                <Text style={textStyles.title22Bold}>{title}</Text>
+                <Text style={textStyles.title20Bold}>{title}</Text>
                 <Text
                     style={[
                         textStyles.subtitle14SemiBold16,

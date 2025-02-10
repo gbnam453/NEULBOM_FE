@@ -1,16 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-import {
-    View,
-    Image,
-    StyleSheet,
-    TouchableOpacity,
-    ScrollView,
-    Linking,
-    FlatList,
-    Dimensions,
-    Text,
-    Alert,
-} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking, FlatList, Dimensions, Text, Alert, ToastAndroid, Platform} from 'react-native';
+
+import NetInfo from '@react-native-community/netinfo';
+
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
 import colors from '../styles/colors';
@@ -20,7 +12,6 @@ import NoticeButton from '../components/HomeScreen/NoticeButton';
 import Banner from '../components/HomeScreen/Banner';
 import OneByOneButton from '../components/HomeScreen/OneByOneButton';
 import TwoByOneButton from '../components/HomeScreen/TwoByOneButton';
-import ThreeByOneButton from '../components/HomeScreen/ThreeByOneButton';
 import TwoByTwoButton from '../components/HomeScreen/TwoByTwoButton';
 import OneByOneButton_V2 from '../components/HomeScreen/OneByOneButton_V2';
 import pkg from '../../package.json'; // 버전 정보 가져오기
@@ -32,6 +23,43 @@ export default function HomeScreen() {
     const flatListRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(1);
     const [mainNotice, setMainNotice] = useState(null);
+    const [isConnected, setIsConnected] = useState(true);
+
+    //인터넷 연결 함수
+    useEffect(() => {
+        const unsubscribe = NetInfo.addEventListener(state => {
+            setIsConnected(state.isConnected);
+            if (!state.isConnected) {
+                showNoInternetAlert();
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    const showNoInternetAlert = () => {
+        if (Platform.OS === 'android') {
+            ToastAndroid.show('인터넷이 연결되어 있지 않아요', ToastAndroid.SHORT);
+        } else {
+            Alert.alert(
+                '네트워크 상태 확인',
+                '인터넷이 연결되어 있지 않아요.',
+                [{ text: '확인' }]
+            );
+        }
+    };
+
+    const handleNetworkCheck = (callback) => {
+        if (isConnected) {
+            callback();
+        } else {
+            if (Platform.OS === 'android') {
+                ToastAndroid.show('인터넷이 연결되어 있지 않아요', ToastAndroid.SHORT);
+            } else {
+                Alert.alert('알림', '인터넷이 연결되어 있지 않아요');
+            }
+        }
+    };
 
     // 공지사항 데이터를 가져오는 함수
     useEffect(() => {
@@ -58,7 +86,11 @@ export default function HomeScreen() {
     };
 
     const CloseFeature = () => {
-        Alert.alert('알림', '아직 공개되지 않은 기능이에요.', [{ text: '확인' }]);
+        if (Platform.OS === 'android') {
+            ToastAndroid.show('아직 공개되지 않은 기능이에요', ToastAndroid.SHORT);
+        } else {
+            Alert.alert('알림', '아직 공개되지 않은 기능이에요');
+        }
     };
 
     const banners = [
@@ -142,7 +174,7 @@ export default function HomeScreen() {
                                     onPress={navigateToDetail} // 상세 화면으로 이동
                                 />
                             ) : (
-                                <NoticeButton title="공지사항을 불러오는 중입니다..." />
+                                <NoticeButton title="인터넷이 연결되어 있지 않아요" />
                             )}
                         </View>
                     </View>
@@ -153,7 +185,7 @@ export default function HomeScreen() {
                             <TwoByTwoButton
                                 title="수업자료"
                                 imageSource={require('../assets/images/Buttons/Button_Download.webp')}
-                                onPress={() => navigateToScreen('DownloadScreen')}
+                                onPress={() => handleNetworkCheck(() => navigateToScreen('DownloadScreen'))}
                             />
                         </View>
                         <View style={styles.column}>
@@ -161,14 +193,14 @@ export default function HomeScreen() {
                                 <OneByOneButton
                                     title="공지사항"
                                     imageSource={require('../assets/images/Buttons/Button_Notice.webp')}
-                                    onPress={() => navigateToScreen('NoticeScreen')}
+                                    onPress={() => handleNetworkCheck(() => navigateToScreen('NoticeScreen'))}
                                 />
                             </View>
                             <View style={styles.buttonContainer}>
                                 <OneByOneButton
-                                    title="학사일정"
-                                    imageSource={require('../assets/images/Buttons/Button_Schedule.webp')}
-                                    onPress={CloseFeature}
+                                    title="문의처"
+                                    imageSource={require('../assets/images/Buttons/Button_Contact.webp')}
+                                    onPress={() => handleNetworkCheck(() => navigateToScreen('ContactScreen'))}
                                 />
                             </View>
                         </View>
@@ -180,44 +212,16 @@ export default function HomeScreen() {
                             <TwoByOneButton
                                 title="서류제출"
                                 imageSource={require('../assets/images/Buttons/Button_Upload.webp')}
-                                onPress={() => navigateToScreen('UploadScreen')}
+                                onPress={() => handleNetworkCheck(() => navigateToScreen('UploadScreen'))}
                             />
                         </View>
                         <View style={styles.buttonContainer}>
                             <OneByOneButton
                                 title="오시는길"
                                 imageSource={require('../assets/images/Buttons/Button_Direction.webp')}
-                                onPress={() => navigateToScreen('DirectionScreen')}
+                                onPress={() => handleNetworkCheck(() => navigateToScreen('DirectionScreen'))}
                             />
                         </View>
-                    </View>
-
-                    {/* 배너 */}
-                    <View style={styles.bannerContainer}>
-                        <FlatList
-                            data={infiniteBanners}
-                            keyExtractor={(_, index) => index.toString()}
-                            renderItem={({ item }) => (
-                                <View style={styles.bannerWrapper}>
-                                    <Banner imageSource={item} />
-                                </View>
-                            )}
-                            horizontal
-                            pagingEnabled
-                            showsHorizontalScrollIndicator={false}
-                            ref={flatListRef}
-                            onMomentumScrollEnd={handleScrollEnd}
-                            snapToInterval={screenWidth}
-                            decelerationRate="fast"
-                            initialScrollIndex={1}
-                            getItemLayout={getItemLayout}
-                            onScrollToIndexFailed={(info) => {
-                                flatListRef.current?.scrollToIndex({
-                                    index: info.index,
-                                    animated: false,
-                                });
-                            }}
-                        />
                     </View>
 
                     {/* SNS */}
@@ -226,36 +230,52 @@ export default function HomeScreen() {
                             <OneByOneButton_V2
                                 title="유튜브"
                                 imageSource={require('../assets/images/Icons/Icon_YouTube.webp')}
-                                onPress={() => openURL('https://www.youtube.com/@neul2bom2/featured')}
+                                onPress={() => handleNetworkCheck(() => openURL('https://www.youtube.com/@neul2bom2/featured'))}
                             />
                         </View>
                         <View style={styles.buttonContainer}>
                             <OneByOneButton_V2
                                 title="인스타그램"
                                 imageSource={require('../assets/images/Icons/Icon_Instagram.webp')}
-                                onPress={() => openURL('https://www.instagram.com/neul2bom2')}
+                                onPress={() => handleNetworkCheck(() => openURL('https://www.instagram.com/neul2bom2'))}
                             />
                         </View>
                         <View style={styles.buttonContainer}>
                             <OneByOneButton_V2
                                 title="페이스북"
                                 imageSource={require('../assets/images/Icons/Icon_Facebook.webp')}
-                                onPress={() => openURL('https://www.facebook.com/people/늘봄/61553601422680/')}
+                                onPress={() => handleNetworkCheck(() => openURL('https://www.facebook.com/people/늘봄/61553601422680/'))}
                             />
                         </View>
                     </View>
+                </View>
 
-                    {/* 문의처 */}
-                    <View style={styles.row}>
-                        <View style={styles.buttonContainer}>
-                            <ThreeByOneButton
-                                title="문의처"
-                                detail="이곳으로 연락해주세요!"
-                                imageSource={require('../assets/images/Buttons/Button_Contact.webp')}
-                                onPress={() => navigateToScreen('ContactScreen')}
-                            />
-                        </View>
-                    </View>
+                {/* 배너 */}
+                <View style={styles.bannerContainer}>
+                    <FlatList
+                        data={infiniteBanners}
+                        keyExtractor={(_, index) => index.toString()}
+                        renderItem={({ item }) => (
+                            <View style={styles.bannerWrapper}>
+                                <Banner imageSource={item} />
+                            </View>
+                        )}
+                        horizontal
+                        pagingEnabled
+                        showsHorizontalScrollIndicator={false}
+                        ref={flatListRef}
+                        onMomentumScrollEnd={handleScrollEnd}
+                        snapToInterval={screenWidth}
+                        decelerationRate="fast"
+                        initialScrollIndex={1}
+                        getItemLayout={getItemLayout}
+                        onScrollToIndexFailed={(info) => {
+                            flatListRef.current?.scrollToIndex({
+                                index: info.index,
+                                animated: false,
+                            });
+                        }}
+                    />
                 </View>
 
                 {/* 버전 표시 */}

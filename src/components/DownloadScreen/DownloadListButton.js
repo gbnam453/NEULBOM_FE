@@ -14,7 +14,7 @@ export default function DownloadListButton({ title, date, link, color = 'white' 
     return (
         <TouchableOpacity style={[styles.button, { backgroundColor: color }]} onPress={handlePress}>
             <View style={styles.titleContainer}>
-                <Text style={textStyles.title22Bold}>{title}</Text>
+                <Text style={textStyles.title20Bold}>{title}</Text>
                 <Text style={[textStyles.subtitle14SemiBold16, { color: colors.gray700, marginTop: 6 }]}>
                     {date} {/* 날짜 값 표시 */}
                 </Text>
