@@ -1,6 +1,6 @@
 {
   "name": "com.gbnam.neulbom",
-  "version": "0.8.1-beta",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",

@@ -82,8 +82,8 @@ android {
         applicationId "com.gbnam.neulbom"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 240114081 // 버전 코드
-        versionName "0.8.1-beta" // 버전 이름
+        versionCode 20250211100 // 버전 코드
+        versionName "1.0.0" // 버전 이름
     }
     signingConfigs {
         debug {
