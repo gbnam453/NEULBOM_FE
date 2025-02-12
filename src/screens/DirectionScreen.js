@@ -1,18 +1,17 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, Text, Linking, Dimensions, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ImageModal from 'react-native-image-modal'; // ImageModal 사용
+import ImageModal from 'react-native-image-modal';
 import colors from '../styles/colors';
 import textStyles from '../styles/textStyles';
 import NavigationBar from '../components/Common/NavigationBar';
 import OneByOneButton_V2 from '../components/HomeScreen/OneByOneButton_V2';
-import ThreeByOneButton from '../components/HomeScreen/ThreeByOneButton';
-
+import AppleMapsButton from '../components/HomeScreen/AppleMapsButton';
 export default function DirectionScreen({ navigation }) {
-
     const navigateToScreen = (screenName) => {
         navigation.navigate(screenName);
     };
+
     const openKakaoMap = () => {
         const url = 'kakaomap://place?id=893613647';
         Linking.canOpenURL(url)
@@ -64,6 +63,11 @@ export default function DirectionScreen({ navigation }) {
             .catch((err) => console.error('An error occurred', err));
     };
 
+    const openAppleMap = () => {
+        const url = 'https://maps.apple.com/?address=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%20%EC%B6%A9%EC%B2%AD%EB%82%A8%EB%8F%84%20%EC%95%84%EC%82%B0%EC%8B%9C%20%EB%B0%B0%EB%B0%A9%EC%9D%8D%20%EA%B3%A0%EC%86%8D%EC%B2%A0%EB%8C%80%EB%A1%9C%2071,%2031470&ll=36.790709,127.107565&q=%ED%98%B8%EC%84%9C%EB%8C%80%ED%95%99%EA%B5%90%20KTX%EC%BA%A0%ED%8D%BC%EC%8A%A4&t=m';
+        Linking.openURL(url).catch((err) => console.error('An error occurred', err));
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <NavigationBar title="오시는길" />
@@ -113,6 +117,19 @@ export default function DirectionScreen({ navigation }) {
                         />
                     </View>
                 </View>
+
+                {/* Apple 지도 버튼 (iOS 전용) */}
+                {Platform.OS === 'ios' && (
+                    <View style={styles.row}>
+                        <View style={styles.buttonContainer}>
+                            <AppleMapsButton
+                                title="Apple 지도로 열기"
+                                imageSource={require('../assets/images/DirectionScreen/applemaps.webp')}
+                                onPress={openAppleMap}
+                            />
+                        </View>
+                    </View>
+                )}
             </ScrollView>
         </SafeAreaView>
     );
