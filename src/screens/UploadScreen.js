@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../styles/colors'; // 색상 파일 import
 import NavigationBar from '../components/Common/NavigationBar'; // NavigationBar import
-import DownloadListButton from '../components/UploadScreen/UploadListButton';
+import UploadListButton from '../components/UploadScreen/UploadListButton';
+import DownloadListButton from '../components/DownloadScreen/DownloadListButton'; // DownloadListButton 추가
 
 export default function UploadScreen({ navigation }) {
     const [notices, setNotices] = useState([]); // 공지사항 데이터를 저장할 상태
@@ -42,12 +43,22 @@ export default function UploadScreen({ navigation }) {
                 <View style={styles.row}>
                     {notices.map((notice, index) => (
                         <View key={notice.id || index} style={styles.buttonContainer}>
-                            <DownloadListButton
-                                title={notice.title}
-                                date={notice.date}
-                                link={notice.link} // link 전달
-                                navigation={navigation} // navigation 전달
-                            />
+                            {/* type 값에 따라 버튼 컴포넌트 선택 */}
+                            {notice.type === 'upload' ? (
+                                <UploadListButton
+                                    title={notice.title}
+                                    date={notice.date}
+                                    link={notice.link}
+                                    navigation={navigation}
+                                />
+                            ) : notice.type === 'download' ? (
+                                <DownloadListButton
+                                    title={notice.title}
+                                    date={notice.date}
+                                    link={notice.link}
+                                    navigation={navigation}
+                                />
+                            ) : null}
                         </View>
                     ))}
                 </View>
