@@ -158,9 +158,11 @@ export default function HomeScreen() {
                     source={require('../assets/images/Icons/Icon_Neulbom.webp')}
                     style={styles.icon}
                 />
+                {/*
                 <TouchableOpacity onPress={CloseFeature}>
                     <ButtonIcon width={24} height={24} />
                 </TouchableOpacity>
+                */}
             </View>
 
             <ScrollView contentContainerStyle={styles.scrollContainer}>
