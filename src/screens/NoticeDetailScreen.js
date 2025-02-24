@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import NavigationBar from '../components/Common/NavigationBar'; // NavigationBar 컴포넌트 import
 import textStyles from '../styles/textStyles'; // textStyles 가져오기
 import colors from '../styles/colors'; // colors 가져오기
@@ -29,7 +30,7 @@ export default function NoticeDetailScreen({ route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.white,
+        backgroundColor: colors.gray050,
     },
     content: {
         padding: 20,
