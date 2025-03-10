@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking, FlatList, Dimensions, Text, Alert, ToastAndroid, Platform} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking, FlatList, Dimensions, Text, Alert, ToastAndroid, Platform, TextInput, Modal} from 'react-native';
 
 import NetInfo from '@react-native-community/netinfo';
 
@@ -24,6 +24,9 @@ export default function HomeScreen() {
     const [currentIndex, setCurrentIndex] = useState(1);
     const [mainNotice, setMainNotice] = useState(null);
     const [isConnected, setIsConnected] = useState(true);
+    const [clickCount, setClickCount] = useState(0);
+    const [password, setPassword] = useState('');
+    const [isModalVisible, setModalVisible] = useState(false);
 
     //인터넷 연결 함수
     useEffect(() => {
@@ -36,6 +39,55 @@ export default function HomeScreen() {
 
         return () => unsubscribe();
     }, []);
+
+    const handleIconPress = () => {
+        if (clickCount + 1 >= 10) {
+            setClickCount(0); // 카운트 초기화
+            showPasswordPrompt();
+        } else {
+            setClickCount(clickCount + 1);
+        }
+    };
+
+    const showPasswordPrompt = () => {
+        if (Platform.OS === 'ios') {
+            // iOS에서는 Alert.prompt() 사용 가능
+            Alert.prompt(
+                'Enter Password',
+                '',
+                [
+                    {
+                        text: '취소',
+                        style: 'cancel'
+                    },
+                    {
+                        text: '확인',
+                        onPress: (input) => {
+                            if (input === 'neulbom2415') {
+                                handleNetworkCheck(() => navigateToScreen('AdminScreen'));
+                            } else {
+                                Alert.alert('Invalid Password', '');
+                            }
+                        }
+                    }
+                ],
+                'secure-text'
+            );
+        } else {
+            // Android에서는 커스텀 모달 사용
+            setModalVisible(true);
+        }
+    };
+
+    const handlePasswordSubmit = () => {
+        if (password === 'neulbom2415') {
+            setModalVisible(false);
+            handleNetworkCheck(() => navigateToScreen('AdminScreen'));
+        } else {
+            Alert.alert('Invalid Password', '');
+        }
+    };
+
 
     const showNoInternetAlert = () => {
         if (Platform.OS === 'android') {
@@ -61,17 +113,22 @@ export default function HomeScreen() {
         }
     };
 
-    // 공지사항 데이터를 가져오는 함수
     useEffect(() => {
-        fetch('http://gbnam453.iptime.org:8080/neulbom/api/mainnotice')
+        fetch('http://gbnam453.iptime.org:8080/api/notices')
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.json();
             })
-            .then((data) => setMainNotice(data[0])) // 첫 번째 데이터만 설정
-            .catch((error) => console.error('Failed to fetch main notice:', error));
+            .then((data) => {
+                if (data.length > 0) {
+                    // ID 기준으로 내림차순 정렬하여 가장 최신 공지를 가져옴
+                    const latestNotice = data.sort((a, b) => b.id - a.id)[0];
+                    setMainNotice(latestNotice);
+                }
+            })
+            .catch((error) => console.error('Failed to fetch notices:', error));
     }, []);
 
     // 상세 화면으로 이동
@@ -79,8 +136,8 @@ export default function HomeScreen() {
         if (mainNotice) {
             navigation.navigate('NoticeDetailScreen', {
                 title: mainNotice.title,
-                date: mainNotice.date,
-                detail: mainNotice.detail,
+                content: mainNotice.content,
+                date: `${mainNotice.region} | ${mainNotice.date}`,
             });
         }
     };
@@ -154,10 +211,12 @@ export default function HomeScreen() {
     return (
         <SafeAreaView edges={['top']} style={styles.container}>
             <View style={styles.shadowBox}>
-                <Image
-                    source={require('../assets/images/Icons/Icon_Neulbom.webp')}
-                    style={styles.icon}
-                />
+                <TouchableOpacity onPress={handleIconPress} activeOpacity={1}>
+                    <Image
+                        source={require('../assets/images/Icons/Icon_Neulbom.webp')}
+                        style={styles.icon}
+                    />
+                </TouchableOpacity>
                 {/*
                 <TouchableOpacity onPress={CloseFeature}>
                     <ButtonIcon width={24} height={24} />
@@ -172,8 +231,8 @@ export default function HomeScreen() {
                         <View style={styles.buttonContainer}>
                             {mainNotice ? (
                                 <NoticeButton
-                                    title={mainNotice.title} // 공지사항 제목만 표시
-                                    onPress={navigateToDetail} // 상세 화면으로 이동
+                                    title={mainNotice.title}
+                                    onPress={navigateToDetail}
                                 />
                             ) : (
                                 <NoticeButton title="인터넷이 연결되어 있지 않아요" />
@@ -287,6 +346,26 @@ export default function HomeScreen() {
                     </Text>
                 </View>
             </ScrollView>
+
+            <Modal visible={isModalVisible} transparent animationType="slide">
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                    <View style={{ width: 300, padding: 20, backgroundColor: 'white', borderRadius: 10 }}>
+                        <Text style={{ marginBottom: 10 }}>Enter Password</Text>
+                        <TextInput
+                            secureTextEntry
+                            value={password}
+                            onChangeText={setPassword}
+                            style={{ borderWidth: 1, borderColor: 'gray', padding: 8, marginBottom: 10 }}
+                        />
+                        <TouchableOpacity onPress={handlePasswordSubmit} style={{ backgroundColor: 'blue', padding: 10, alignItems: 'center', borderRadius: 5 }}>
+                            <Text style={{ color: 'white' }}>확인</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setModalVisible(false)} style={{ marginTop: 10, alignItems: 'center' }}>
+                            <Text style={{ color: 'red' }}>취소</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
         </SafeAreaView>
     );
 }
@@ -307,7 +386,8 @@ const styles = StyleSheet.create({
         paddingRight: 20,
     },
     icon: {
-        width: '15%',
+        width: 60,
+        height: 40,
         resizeMode: 'contain',
     },
     buttonWrapper: {

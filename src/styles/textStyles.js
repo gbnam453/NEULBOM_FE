@@ -23,6 +23,11 @@ export default StyleSheet.create({
     fontSize: 20,
     lineHeight: 22,
   },
+    Category: {
+    fontFamily: fonts.bold,
+    fontSize: 20,
+    lineHeight: 40
+  },
   title18Bold: {
     fontFamily: fonts.bold,
     fontSize: 18,

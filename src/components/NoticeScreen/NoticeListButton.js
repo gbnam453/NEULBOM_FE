@@ -4,12 +4,12 @@ import { useNavigation } from '@react-navigation/native'; // 네비게이션 훅
 import textStyles from '../../styles/textStyles'; // textStyles 가져오기
 import colors from '../../styles/colors'; // colors 가져오기
 
-export default function NoticeListButton({ title, date, detail, color = 'white' }) {
+export default function NoticeListButton({ title, content, date, color = 'white' }) {
     const navigation = useNavigation(); // 네비게이션 객체 가져오기
 
     const handlePress = () => {
         // NoticeDetailScreen으로 데이터 전달하며 이동
-        navigation.navigate('NoticeDetailScreen', { title, date, detail });
+        navigation.navigate('NoticeDetailScreen', { title, content, date });
     };
 
     return (

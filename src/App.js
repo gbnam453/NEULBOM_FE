@@ -15,6 +15,7 @@ import ContactScreen from './screens/ContactScreen';
 import DownloadScreen from './screens/DownloadScreen';
 import WebViewScreen from './screens/WebViewScreen';
 import NoticeDetailScreen from './screens/NoticeDetailScreen';
+import AdminScreen from './screens/AdminScreen';
 
 enableScreens();
 
@@ -44,6 +45,7 @@ export default function App() {
                 <Stack.Screen name="ContactScreen" component={ContactScreen} options={{ headerShown: false }}/>
                 <Stack.Screen name="WebViewScreen" component={WebViewScreen} options={{ headerShown: false }}/>
                 <Stack.Screen name="NoticeDetailScreen" component={NoticeDetailScreen} options={{ headerShown: false }}/>
+                <Stack.Screen name="AdminScreen" component={AdminScreen} options={{ headerShown: false }}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
