@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Button, FlatList, Alert, TouchableOpacity } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const API_URL = "http://gbnam453.iptime.org:8080/api/notices"; // Spring Boot API 주소
+const API_URL = "http://gbnam453.iptime.org:2401/api/notices"; // Spring Boot API 주소
 
 const AdminScreen = () => {
     const [notices, setNotices] = useState([]);

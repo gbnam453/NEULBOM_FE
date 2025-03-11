@@ -5,7 +5,7 @@ import colors from '../styles/colors'; // 색상 파일 import
 import NavigationBar from '../components/Common/NavigationBar'; // NavigationBar import
 import UploadListButton from '../components/UploadScreen/UploadListButton';
 
-const API_URL = 'http://gbnam453.iptime.org:8080/api/uploads'; // 업로드 목록 조회 API
+const API_URL = 'http://gbnam453.iptime.org:2401/api/uploads'; // 업로드 목록 조회 API
 
 export default function UploadScreen({ navigation }) {
     const [uploads, setUploads] = useState([]); // 업로드 데이터를 저장할 상태

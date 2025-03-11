@@ -12,7 +12,7 @@ export default function DownloadScreen({ navigation }) {
 
     useEffect(() => {
         // API 요청을 보내서 공지사항 데이터를 가져옴
-        fetch('http://gbnam453.iptime.org:8080/neulbom/api/download')
+        fetch('http://gbnam453.iptime.org:2401/neulbom/api/download')
             .then((response) => response.json())
             .then((data) => {
                 setNotices(data); // 가져온 데이터를 notices 상태에 저장

@@ -5,7 +5,7 @@ import colors from '../styles/colors'; // 색상 파일 import
 import NavigationBar from '../components/Common/NavigationBar'; // NavigationBar import
 import NoticeListButton from '../components/NoticeScreen/NoticeListButton';
 
-const API_URL = 'http://gbnam453.iptime.org:8080/api/notices'; // Spring Boot API 주소
+const API_URL = 'http://gbnam453.iptime.org:2401/api/notices'; // Spring Boot API 주소
 
 export default function NoticeScreen({ navigation }) {
     const [notices, setNotices] = useState([]); // 공지사항 데이터를 저장할 상태

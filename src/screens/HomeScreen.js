@@ -114,7 +114,7 @@ export default function HomeScreen() {
     };
 
     useEffect(() => {
-        fetch('http://gbnam453.iptime.org:8080/api/notices')
+        fetch('http://gbnam453.iptime.org:2401/api/notices')
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
