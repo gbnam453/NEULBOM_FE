@@ -11,7 +11,7 @@ export default function NoticeButton({ title, onPress }) {
             </View>
             {/* 기존 텍스트 */}
             <View style={styles.titleContainer}>
-                <Text style={[textStyles.title14Bold, styles.whiteText]}>{title}</Text>
+                <Text style={[textStyles.subtitle14SemiBold21, styles.whiteText]}>{title}</Text>
             </View>
         </TouchableOpacity>
     );

@@ -14,17 +14,12 @@ export default function NoticeListButton({ title, content, date, color = 'white'
 
     return (
         <TouchableOpacity
-            style={[styles.button, { backgroundColor: color }]}
+            style={[styles.button]}
             onPress={handlePress}
         >
             <View style={styles.titleContainer}>
-                <Text style={textStyles.title20Bold}>{title}</Text>
-                <Text
-                    style={[
-                        textStyles.subtitle14SemiBold16,
-                        { color: colors.gray700, marginTop: 6 },
-                    ]}
-                >
+                <Text style={textStyles.subtitle18semiBold20}>{title}</Text>
+                <Text style={[textStyles.caption14Medium16, { color: colors.gray700, marginTop: 6 },]}>
                     {date} {/* 날짜 값 표시 */}
                 </Text>
             </View>
@@ -43,12 +38,9 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start', // 텍스트를 왼쪽으로 정렬
         paddingLeft: 12, // 왼쪽 여백 12px
         paddingTop: 16, // 위쪽 여백 16px
-        paddingBottom: 16, // 아래쪽 여백 추가 (텍스트 아래의 여백을 감싸기 위해)
-        elevation: 2, // 약간의 엘리베이션 효과
-        shadowColor: '#000', // 그림자 색상
-        shadowOffset: { width: 0, height: 2 }, // 그림자 위치
-        shadowOpacity: 0.1, // 그림자 투명도
-        shadowRadius: 3, // 그림자 반경
+        paddingBottom: 26, // 아래쪽 여백 추가 (텍스트 아래의 여백을 감싸기 위해)
+        borderBottomWidth: 1,
+        borderBottomColor: colors.gray300,
     },
     titleContainer: {
         justifyContent: 'flex-start', // 텍스트 위쪽으로 정렬

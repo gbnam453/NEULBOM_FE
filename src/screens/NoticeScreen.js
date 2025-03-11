@@ -59,7 +59,7 @@ export default function NoticeScreen({ navigation }) {
                                 <NoticeListButton
                                     title={notice.title}
                                     content={notice.content}
-                                    date={`${notice.region} | ${notice.date}`} // 지역 | 날짜 형식
+                                    date={`${notice.date} | ${notice.region}`} // 지역 | 날짜 형식
                                     navigation={navigation}
                                 />
                             </View>

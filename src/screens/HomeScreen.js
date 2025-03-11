@@ -137,7 +137,7 @@ export default function HomeScreen() {
             navigation.navigate('NoticeDetailScreen', {
                 title: mainNotice.title,
                 content: mainNotice.content,
-                date: `${mainNotice.region} | ${mainNotice.date}`,
+                date: `${mainNotice.date} | ${mainNotice.region}`,
             });
         }
     };

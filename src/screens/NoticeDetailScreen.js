@@ -16,11 +16,11 @@ export default function NoticeDetailScreen({ route }) {
             {/* 공지사항 상세 내용 */}
             <ScrollView contentContainerStyle={styles.content}>
                 <View style={styles.titleContainer}>
-                    <Text style={textStyles.title18Bold}>{title}</Text>
-                    <Text style={[textStyles.title14Bold, styles.date]}>{date}</Text>
+                    <Text style={textStyles.subtitle18semiBold20}>{title}</Text>
+                    <Text style={[textStyles.caption14Medium16, styles.date]}>{date}</Text>
                 </View>
                 <View style={styles.detailContainer}>
-                    <Text style={[textStyles.title16SemiBold, styles.detail]}>{content}</Text>
+                    <Text style={[textStyles.caption14Medium16, styles.detail]}>{content}</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>
