@@ -1,13 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
-import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking, FlatList, Dimensions, Text, Alert, ToastAndroid, Platform, TextInput, Modal} from 'react-native';
-
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking, FlatList, Dimensions, Text, Alert, ToastAndroid, Platform} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
-
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
 import colors from '../styles/colors';
 import textStyles from '../styles/textStyles';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import NoticeButton from '../components/HomeScreen/NoticeButton';
 import Banner from '../components/HomeScreen/Banner';
 import OneByOneButton from '../components/HomeScreen/OneByOneButton';
@@ -25,8 +22,6 @@ export default function HomeScreen() {
     const [mainNotice, setMainNotice] = useState(null);
     const [isConnected, setIsConnected] = useState(true);
     const [clickCount, setClickCount] = useState(0);
-    const [password, setPassword] = useState('');
-    const [isModalVisible, setModalVisible] = useState(false);
 
     //인터넷 연결 함수
     useEffect(() => {
@@ -43,51 +38,11 @@ export default function HomeScreen() {
     const handleIconPress = () => {
         if (clickCount + 1 >= 10) {
             setClickCount(0); // 카운트 초기화
-            showPasswordPrompt();
+            handleNetworkCheck(() => navigateToScreen('AdminScreen'));
         } else {
             setClickCount(clickCount + 1);
         }
     };
-
-    const showPasswordPrompt = () => {
-        if (Platform.OS === 'ios') {
-            // iOS에서는 Alert.prompt() 사용 가능
-            Alert.prompt(
-                'Enter Password',
-                '',
-                [
-                    {
-                        text: '취소',
-                        style: 'cancel'
-                    },
-                    {
-                        text: '확인',
-                        onPress: (input) => {
-                            if (input === 'neulbom2415') {
-                                handleNetworkCheck(() => navigateToScreen('AdminScreen'));
-                            } else {
-                                Alert.alert('Invalid Password', '');
-                            }
-                        }
-                    }
-                ],
-                'secure-text'
-            );
-        } else {
-            // Android에서는 커스텀 모달 사용
-            setModalVisible(true);
-        }
-    };
-
-    const handlePasswordSubmit = () => {
-        if (password === 'neulbom2415') {
-            setModalVisible(false);
-            handleNetworkCheck(() => navigateToScreen('AdminScreen'));
-        } else {
-            Alert.alert('Invalid Password', '');
-        }
-    };
-
 
     const showNoInternetAlert = () => {
         if (Platform.OS === 'android') {
@@ -113,23 +68,30 @@ export default function HomeScreen() {
         }
     };
 
-    useEffect(() => {
-        fetch('http://gbnam453.iptime.org:2401/api/notices')
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                if (data.length > 0) {
-                    // ID 기준으로 내림차순 정렬하여 가장 최신 공지를 가져옴
-                    const latestNotice = data.sort((a, b) => b.id - a.id)[0];
-                    setMainNotice(latestNotice);
-                }
-            })
-            .catch((error) => console.error('Failed to fetch notices:', error));
-    }, []);
+    // 공지사항 가져오는 함수
+    const fetchNotices = async () => {
+        try {
+            const response = await fetch('http://gbnam453.iptime.org:2401/api/notices');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            if (data.length > 0) {
+                // ID 기준으로 내림차순 정렬하여 가장 최신 공지를 가져옴
+                const latestNotice = data.sort((a, b) => b.id - a.id)[0];
+                setMainNotice(latestNotice);
+            }
+        } catch (error) {
+            console.error('Failed to fetch notices:', error);
+        }
+    };
+
+    // ✅ 화면이 포커스를 받을 때마다 fetchNotices 실행
+    useFocusEffect(
+        useCallback(() => {
+            fetchNotices();
+        }, [])
+    );
 
     // 상세 화면으로 이동
     const navigateToDetail = () => {
@@ -139,14 +101,6 @@ export default function HomeScreen() {
                 content: mainNotice.content,
                 date: `${mainNotice.date} | ${mainNotice.region}`,
             });
-        }
-    };
-
-    const CloseFeature = () => {
-        if (Platform.OS === 'android') {
-            ToastAndroid.show('아직 공개되지 않은 기능이에요', ToastAndroid.SHORT);
-        } else {
-            Alert.alert('알림', '아직 공개되지 않은 기능이에요');
         }
     };
 
@@ -166,16 +120,6 @@ export default function HomeScreen() {
     const openURL = (url) => {
         Linking.openURL(url).catch((err) => console.error('Failed to open URL: ', err));
     };
-
-    // 이미지 미리 로드
-    useEffect(() => {
-        const preloadImages = async () => {
-            await Promise.all(
-                banners.map((image) => Image.prefetch(Image.resolveAssetSource(image).uri))
-            );
-        };
-        preloadImages();
-    }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -232,7 +176,7 @@ export default function HomeScreen() {
                             {mainNotice ? (
                                 <NoticeButton
                                     title={mainNotice.title}
-                                    onPress={navigateToDetail}
+                                    onPress={() => handleNetworkCheck(navigateToDetail)}
                                 />
                             ) : (
                                 <NoticeButton title="인터넷이 연결되어 있지 않아요" />
@@ -346,26 +290,6 @@ export default function HomeScreen() {
                     </Text>
                 </View>
             </ScrollView>
-
-            <Modal visible={isModalVisible} transparent animationType="slide">
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-                    <View style={{ width: 300, padding: 20, backgroundColor: 'white', borderRadius: 10 }}>
-                        <Text style={{ marginBottom: 10 }}>Enter Password</Text>
-                        <TextInput
-                            secureTextEntry
-                            value={password}
-                            onChangeText={setPassword}
-                            style={{ borderWidth: 1, borderColor: 'gray', padding: 8, marginBottom: 10 }}
-                        />
-                        <TouchableOpacity onPress={handlePasswordSubmit} style={{ backgroundColor: 'blue', padding: 10, alignItems: 'center', borderRadius: 5 }}>
-                            <Text style={{ color: 'white' }}>확인</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => setModalVisible(false)} style={{ marginTop: 10, alignItems: 'center' }}>
-                            <Text style={{ color: 'red' }}>취소</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </Modal>
         </SafeAreaView>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Alert, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../styles/colors'; // 색상 파일 import
 import NavigationBar from '../components/Common/NavigationBar'; // NavigationBar import
@@ -10,12 +10,13 @@ const API_URL = 'http://gbnam453.iptime.org:2401/api/uploads'; // 업로드 목�
 export default function UploadScreen({ navigation }) {
     const [uploads, setUploads] = useState([]); // 업로드 데이터를 저장할 상태
     const [loading, setLoading] = useState(true); // 데이터 로딩 상태
+    const [refreshing, setRefreshing] = useState(false); // 새로고침 상태
 
     useEffect(() => {
         fetchUploads(); // 업로드 목록 가져오기
     }, []);
 
-    // 업로드 목록 가져오기 함수
+    // ✅ 업로드 목록 가져오기 함수
     const fetchUploads = async () => {
         try {
             const response = await fetch(API_URL);
@@ -28,8 +29,15 @@ export default function UploadScreen({ navigation }) {
             console.error('업로드 목록 가져오기 실패:', error);
             Alert.alert('에러', '업로드 목록을 불러올 수 없습니다.');
         } finally {
-            setLoading(false); // 로딩 완료
+            setLoading(false);
+            setRefreshing(false); // 새로고침 종료
         }
+    };
+
+    // ✅ 새로고침 함수
+    const onRefresh = () => {
+        setRefreshing(true); // 새로고침 시작
+        fetchUploads(); // 데이터를 다시 불러옴
     };
 
     // 로딩 중일 때는 로딩 인디케이터 표시
@@ -47,8 +55,13 @@ export default function UploadScreen({ navigation }) {
             {/* 네비게이션 바 */}
             <NavigationBar title="서류제출" />
 
-            {/* 스크롤 가능한 화면 내용 */}
-            <ScrollView contentContainerStyle={styles.scrollContent}>
+            {/* 스크롤 가능한 화면 내용 + 새로고침 기능 추가 */}
+            <ScrollView
+                contentContainerStyle={styles.scrollContent}
+                refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                }
+            >
                 <View style={styles.row}>
                     {uploads.length > 0 ? (
                         uploads.map((upload, index) => (

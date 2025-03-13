@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import WebView from 'react-native-webview';
 import NavigationBar from '../components/Common/NavigationBar';
+import colors from '../styles/colors';
 
 export default function WebViewScreen({ route }) {
     const { url } = route.params; // 전달받은 URL
@@ -18,7 +19,7 @@ export default function WebViewScreen({ route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: colors.gray050,
     },
     webView: {
         flex: 1,
