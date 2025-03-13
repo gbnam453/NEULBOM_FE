@@ -23,6 +23,11 @@ export default StyleSheet.create({
     fontSize: 20,
     lineHeight: 22,
   },
+  Category: {
+    fontFamily: fonts.bold,
+    fontSize: 20,
+    lineHeight: 40,
+  },
   title18Bold: {
     fontFamily: fonts.bold,
     fontSize: 18,
@@ -50,10 +55,20 @@ export default StyleSheet.create({
   },
 
   // Subtitle
-  subtitle14SemiBold24: {
+  subtitle20semiBold22: {
+    fontFamily: fonts.semiBold,
+    fontSize: 20,
+    lineHeight: 22,
+  },
+  subtitle18semiBold20: {
+    fontFamily: fonts.semiBold,
+    fontSize: 20,
+    lineHeight: 22,
+  },
+  subtitle14SemiBold21: {
     fontFamily: fonts.semiBold,
     fontSize: 14,
-    lineHeight: 24,
+    lineHeight: 21,
   },
   subtitle14SemiBold16: {
     fontFamily: fonts.semiBold,
@@ -79,6 +94,11 @@ export default StyleSheet.create({
   },
 
   // Caption
+  caption14Medium16: {
+    fontFamily: fonts.medium,
+    fontSize: 14,
+    lineHeight: 16,
+  },
   caption11Medium: {
     fontFamily: fonts.medium,
     fontSize: 11,

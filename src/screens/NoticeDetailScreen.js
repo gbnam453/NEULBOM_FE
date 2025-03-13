@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import NavigationBar from '../components/Common/NavigationBar'; // NavigationBar 컴포넌트 import
 import textStyles from '../styles/textStyles'; // textStyles 가져오기
 import colors from '../styles/colors'; // colors 가져오기
 
 export default function NoticeDetailScreen({ route }) {
-    const { title, date, detail } = route.params; // 전달받은 데이터
+    const { title, date, content } = route.params; // 전달받은 데이터
 
     return (
         <SafeAreaView style={styles.container}>
@@ -15,11 +16,11 @@ export default function NoticeDetailScreen({ route }) {
             {/* 공지사항 상세 내용 */}
             <ScrollView contentContainerStyle={styles.content}>
                 <View style={styles.titleContainer}>
-                    <Text style={textStyles.title18Bold}>{title}</Text>
-                    <Text style={[textStyles.title14Bold, styles.date]}>{date}</Text>
+                    <Text style={textStyles.subtitle18semiBold20}>{title}</Text>
+                    <Text style={[textStyles.caption14Medium16, styles.date]}>{date}</Text>
                 </View>
                 <View style={styles.detailContainer}>
-                    <Text style={[textStyles.title16SemiBold, styles.detail]}>{detail}</Text>
+                    <Text style={[textStyles.caption14Medium16, styles.detail]}>{content}</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -29,7 +30,7 @@ export default function NoticeDetailScreen({ route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.white,
+        backgroundColor: colors.gray050,
     },
     content: {
         padding: 20,

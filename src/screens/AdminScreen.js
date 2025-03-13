@@ -3,25 +3,23 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import WebView from 'react-native-webview';
 import NavigationBar from '../components/Common/NavigationBar';
-import colors from '../styles/colors';
 
-export default function WebViewScreen({ route }) {
-    const { url } = route.params; // 전달받은 URL
-
+const AdminScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
-            <NavigationBar title="서류제출" />
-            <WebView source={{ uri: url }} style={styles.webView} />
+            <WebView source={{ uri: 'http://gbnam453.iptime.org:2402' }} style={styles.webView} />
         </SafeAreaView>
     );
 }
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         flex: 1,
-        backgroundColor: colors.gray050,
+        backgroundColor: '#fff',
     },
     webView: {
         flex: 1,
     },
-});
+};
+
+export default AdminScreen;

@@ -13,8 +13,10 @@ import DirectionScreen from './screens/DirectionScreen';
 import WelcomeMessageScreen from './screens/WelcomeMessageScreen';
 import ContactScreen from './screens/ContactScreen';
 import DownloadScreen from './screens/DownloadScreen';
+import DownloadDetailScreen from './screens/DownloadDetailScreen';
 import WebViewScreen from './screens/WebViewScreen';
 import NoticeDetailScreen from './screens/NoticeDetailScreen';
+import AdminScreen from './screens/AdminScreen';
 
 enableScreens();
 
@@ -39,11 +41,13 @@ export default function App() {
                 <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} options={{ headerShown: false }}/>
                 <Stack.Screen name="UploadScreen" component={UploadScreen} options={{ headerShown: false }}/>
                 <Stack.Screen name="DownloadScreen" component={DownloadScreen} options={{ headerShown: false }}/>
+                <Stack.Screen name="DownloadDetailScreen" component={DownloadDetailScreen} options={{ headerShown: false }}/>
                 <Stack.Screen name="DirectionScreen" component={DirectionScreen} options={{ headerShown: false }}/>
                 <Stack.Screen name="WelcomeMessageScreen" component={WelcomeMessageScreen} options={{ headerShown: false }}/>
                 <Stack.Screen name="ContactScreen" component={ContactScreen} options={{ headerShown: false }}/>
                 <Stack.Screen name="WebViewScreen" component={WebViewScreen} options={{ headerShown: false }}/>
                 <Stack.Screen name="NoticeDetailScreen" component={NoticeDetailScreen} options={{ headerShown: false }}/>
+                <Stack.Screen name="AdminScreen" component={AdminScreen} options={{ headerShown: false }}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

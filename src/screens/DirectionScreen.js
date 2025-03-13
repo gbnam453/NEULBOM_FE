@@ -6,7 +6,7 @@ import colors from '../styles/colors';
 import textStyles from '../styles/textStyles';
 import NavigationBar from '../components/Common/NavigationBar';
 import OneByOneButton_V2 from '../components/HomeScreen/OneByOneButton_V2';
-import AppleMapsButton from '../components/HomeScreen/AppleMapsButton';
+import AppleMapsButton from '../components/DirectionScreen/AppleMapsButton';
 export default function DirectionScreen({ navigation }) {
     const navigateToScreen = (screenName) => {
         navigation.navigate(screenName);

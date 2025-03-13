@@ -1,13 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking, FlatList, Dimensions, Text, Alert, ToastAndroid, Platform} from 'react-native';
-
 import NetInfo from '@react-native-community/netinfo';
-
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ButtonIcon from '../assets/images/Buttons/Button_Notification.svg';
 import colors from '../styles/colors';
 import textStyles from '../styles/textStyles';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import NoticeButton from '../components/HomeScreen/NoticeButton';
 import Banner from '../components/HomeScreen/Banner';
 import OneByOneButton from '../components/HomeScreen/OneByOneButton';
@@ -24,6 +21,7 @@ export default function HomeScreen() {
     const [currentIndex, setCurrentIndex] = useState(1);
     const [mainNotice, setMainNotice] = useState(null);
     const [isConnected, setIsConnected] = useState(true);
+    const [clickCount, setClickCount] = useState(0);
 
     //인터넷 연결 함수
     useEffect(() => {
@@ -36,6 +34,15 @@ export default function HomeScreen() {
 
         return () => unsubscribe();
     }, []);
+
+    const handleIconPress = () => {
+        if (clickCount + 1 >= 10) {
+            setClickCount(0); // 카운트 초기화
+            handleNetworkCheck(() => navigateToScreen('AdminScreen'));
+        } else {
+            setClickCount(clickCount + 1);
+        }
+    };
 
     const showNoInternetAlert = () => {
         if (Platform.OS === 'android') {
@@ -61,35 +68,39 @@ export default function HomeScreen() {
         }
     };
 
-    // 공지사항 데이터를 가져오는 함수
-    useEffect(() => {
-        fetch('http://gbnam453.iptime.org:8080/neulbom/api/mainnotice')
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => setMainNotice(data[0])) // 첫 번째 데이터만 설정
-            .catch((error) => console.error('Failed to fetch main notice:', error));
-    }, []);
+    // 공지사항 가져오는 함수
+    const fetchNotices = async () => {
+        try {
+            const response = await fetch('http://gbnam453.iptime.org:2401/api/notices');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            if (data.length > 0) {
+                // ID 기준으로 내림차순 정렬하여 가장 최신 공지를 가져옴
+                const latestNotice = data.sort((a, b) => b.id - a.id)[0];
+                setMainNotice(latestNotice);
+            }
+        } catch (error) {
+            console.error('Failed to fetch notices:', error);
+        }
+    };
+
+    // ✅ 화면이 포커스를 받을 때마다 fetchNotices 실행
+    useFocusEffect(
+        useCallback(() => {
+            fetchNotices();
+        }, [])
+    );
 
     // 상세 화면으로 이동
     const navigateToDetail = () => {
         if (mainNotice) {
             navigation.navigate('NoticeDetailScreen', {
                 title: mainNotice.title,
-                date: mainNotice.date,
-                detail: mainNotice.detail,
+                content: mainNotice.content,
+                date: `${mainNotice.date} | ${mainNotice.region}`,
             });
-        }
-    };
-
-    const CloseFeature = () => {
-        if (Platform.OS === 'android') {
-            ToastAndroid.show('아직 공개되지 않은 기능이에요', ToastAndroid.SHORT);
-        } else {
-            Alert.alert('알림', '아직 공개되지 않은 기능이에요');
         }
     };
 
@@ -109,16 +120,6 @@ export default function HomeScreen() {
     const openURL = (url) => {
         Linking.openURL(url).catch((err) => console.error('Failed to open URL: ', err));
     };
-
-    // 이미지 미리 로드
-    useEffect(() => {
-        const preloadImages = async () => {
-            await Promise.all(
-                banners.map((image) => Image.prefetch(Image.resolveAssetSource(image).uri))
-            );
-        };
-        preloadImages();
-    }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -154,13 +155,17 @@ export default function HomeScreen() {
     return (
         <SafeAreaView edges={['top']} style={styles.container}>
             <View style={styles.shadowBox}>
-                <Image
-                    source={require('../assets/images/Icons/Icon_Neulbom.webp')}
-                    style={styles.icon}
-                />
+                <TouchableOpacity onPress={handleIconPress} activeOpacity={1}>
+                    <Image
+                        source={require('../assets/images/Icons/Icon_Neulbom.webp')}
+                        style={styles.icon}
+                    />
+                </TouchableOpacity>
+                {/*
                 <TouchableOpacity onPress={CloseFeature}>
                     <ButtonIcon width={24} height={24} />
                 </TouchableOpacity>
+                */}
             </View>
 
             <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -170,8 +175,8 @@ export default function HomeScreen() {
                         <View style={styles.buttonContainer}>
                             {mainNotice ? (
                                 <NoticeButton
-                                    title={mainNotice.title} // 공지사항 제목만 표시
-                                    onPress={navigateToDetail} // 상세 화면으로 이동
+                                    title={mainNotice.title}
+                                    onPress={() => handleNetworkCheck(navigateToDetail)}
                                 />
                             ) : (
                                 <NoticeButton title="인터넷이 연결되어 있지 않아요" />
@@ -305,7 +310,8 @@ const styles = StyleSheet.create({
         paddingRight: 20,
     },
     icon: {
-        width: '15%',
+        width: 60,
+        height: 40,
         resizeMode: 'contain',
     },
     buttonWrapper: {

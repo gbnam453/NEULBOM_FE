@@ -1,22 +1,20 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, View, Dimensions } from 'react-native';
-import { Linking } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, View, Dimensions, Linking } from 'react-native';
 import textStyles from '../../styles/textStyles'; // textStyles 가져오기
 import colors from '../../styles/colors'; // colors 가져오기
 
-export default function DownloadListButton({ title, date, link, color = 'white' }) {
+export default function DownloadListButton({ title, category, type, link, navigation, color = 'white' }) {
     const handlePress = () => {
-        if (link) {
-            Linking.openURL(link); // 링크를 기본 브라우저에서 열기
-        }
+        if (!link) return; // 링크가 없으면 아무 동작 안 함
+        Linking.openURL(link).catch(err => console.error('링크를 열 수 없습니다:', err));
     };
 
     return (
-        <TouchableOpacity style={[styles.button, { backgroundColor: color }]} onPress={handlePress}>
+        <TouchableOpacity style={[styles.button]} onPress={handlePress}>
             <View style={styles.titleContainer}>
-                <Text style={textStyles.title20Bold}>{title}</Text>
-                <Text style={[textStyles.subtitle14SemiBold16, { color: colors.gray700, marginTop: 6 }]}>
-                    {date} {/* 날짜 값 표시 */}
+                <Text style={textStyles.subtitle18semiBold20}>{title}</Text>
+                <Text style={[textStyles.caption14Medium16, { color: colors.gray700, marginTop: 6 }]}>
+                    {category + ' | ' +type} {/* 날짜 값 표시 */}
                 </Text>
             </View>
         </TouchableOpacity>
@@ -34,12 +32,9 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start', // 텍스트를 왼쪽으로 정렬
         paddingLeft: 12, // 왼쪽 여백 12px
         paddingTop: 16, // 위쪽 여백 16px
-        paddingBottom: 16, // 아래쪽 여백 추가 (텍스트 아래의 여백을 감싸기 위해)
-        elevation: 2, // 약간의 엘리베이션 효과
-        shadowColor: '#000', // 그림자 색상
-        shadowOffset: { width: 0, height: 2 }, // 그림자 위치
-        shadowOpacity: 0.1, // 그림자 투명도
-        shadowRadius: 3, // 그림자 반경
+        paddingBottom: 26, // 아래쪽 여백 추가 (텍스트 아래의 여백을 감싸기 위해)
+        borderBottomWidth: 1,
+        borderBottomColor: colors.gray300,
     },
     titleContainer: {
         justifyContent: 'flex-start', // 텍스트 위쪽으로 정렬
