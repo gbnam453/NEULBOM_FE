@@ -107,6 +107,9 @@ export default function HomeScreen() {
     const banners = [
         require('../assets/images/Banner/Banner_Education.webp'),
         require('../assets/images/Banner/Banner_KoreaScience.webp'),
+        require('../assets/images/Banner/Banner_Asan.webp'),
+        require('../assets/images/Banner/Banner_Seosan.webp'),
+        require('../assets/images/Banner/Banner_Daejeon.webp'),
         require('../assets/images/Banner/Banner_HoseoUniv.webp'),
         require('../assets/images/Banner/Banner_Neulbom.webp'),
     ];
