@@ -55,7 +55,7 @@ export default function NoticeDetailScreen({ route }) {
                             {images.map((img, index) => (
                                 <ImageModal
                                     key={index}
-                                    resizeMode="cover"
+                                    resizeMode="contain"
                                     imageBackgroundColor={colors.gray050}
                                     style={styles.imageThumbnail}
                                     source={{ uri: img.imageUrl }}
