@@ -39,7 +39,7 @@ export default function NoticeDetailScreen({ route }) {
                 <View style={styles.titleContainer}>
                     <Text style={textStyles.subtitle18semiBold20}>{title}</Text>
                     <Text style={[textStyles.caption14Medium16, styles.date]}>
-                        {date}{region}
+                        {date} | {region}
                     </Text>
                 </View>
                 <View style={styles.detailContainer}>
@@ -51,13 +51,15 @@ export default function NoticeDetailScreen({ route }) {
                     {loadingImages ? (
                         <ActivityIndicator size="small" color={colors.gray700} style={styles.loader} />
                     ) : (
-                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                             {images.map((img, index) => (
                                 <ImageModal
                                     key={index}
+                                    // 썸네일은 여전히 style로 작게 표시됨
                                     resizeMode="contain"
                                     imageBackgroundColor={colors.gray050}
                                     style={styles.imageThumbnail}
+                                    // modalImageStyle를 지정하지 않으면, 원본 이미지 해상도로 표시됨
                                     source={{ uri: img.imageUrl }}
                                 />
                             ))}
