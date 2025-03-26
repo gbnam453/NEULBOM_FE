@@ -1,26 +1,68 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import NavigationBar from '../components/Common/NavigationBar'; // NavigationBar 컴포넌트 import
-import textStyles from '../styles/textStyles'; // textStyles 가져오기
-import colors from '../styles/colors'; // colors 가져오기
+import NavigationBar from '../components/Common/NavigationBar';
+import ImageModal from 'react-native-image-modal';
+import colors from '../styles/colors';
+import textStyles from '../styles/textStyles';
+
+const API_URL = 'http://gbnam453.iptime.org:2401/api/notices';
 
 export default function NoticeDetailScreen({ route }) {
-    const { title, date, content } = route.params; // 전달받은 데이터
+    const { id, title, date, content, region } = route.params;
+    const [images, setImages] = useState([]);
+    const [loadingImages, setLoadingImages] = useState(true);
+
+    useEffect(() => {
+        const fetchImages = async () => {
+            try {
+                const response = await fetch(`${API_URL}/${id}/images`);
+                if (!response.ok) {
+                    throw new Error('서버 응답 실패');
+                }
+                const data = await response.json();
+                setImages(data);
+            } catch (error) {
+                console.error('이미지 가져오기 실패:', error);
+                Alert.alert('에러', '이미지를 불러올 수 없습니다.');
+            } finally {
+                setLoadingImages(false);
+            }
+        };
+        fetchImages();
+    }, [id]);
 
     return (
         <SafeAreaView style={styles.container}>
-            {/* 상단 NavigationBar */}
             <NavigationBar title="공지사항" />
-
-            {/* 공지사항 상세 내용 */}
             <ScrollView contentContainerStyle={styles.content}>
                 <View style={styles.titleContainer}>
                     <Text style={textStyles.subtitle18semiBold20}>{title}</Text>
-                    <Text style={[textStyles.caption14Medium16, styles.date]}>{date}</Text>
+                    <Text style={[textStyles.caption14Medium16, styles.date]}>
+                        {date}{region}
+                    </Text>
                 </View>
                 <View style={styles.detailContainer}>
-                    <Text style={[textStyles.caption14Medium16, styles.detail]}>{content}</Text>
+                    <Text style={[textStyles.caption14Medium16, styles.detail]}>
+                        {content}
+                    </Text>
+                </View>
+                <View style={styles.imageSection}>
+                    {loadingImages ? (
+                        <ActivityIndicator size="small" color={colors.gray700} style={styles.loader} />
+                    ) : (
+                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                            {images.map((img, index) => (
+                                <ImageModal
+                                    key={index}
+                                    resizeMode="contain"
+                                    imageBackgroundColor={colors.gray050}
+                                    style={styles.imageThumbnail}
+                                    source={{ uri: img.imageUrl }}
+                                />
+                            ))}
+                        </ScrollView>
+                    )}
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -36,7 +78,7 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     titleContainer: {
-        marginBottom: 0,
+        marginBottom: 20,
         borderBottomWidth: 1,
         borderBottomColor: colors.gray300,
         paddingBottom: 20,
@@ -50,5 +92,17 @@ const styles = StyleSheet.create({
     },
     detail: {
         color: colors.gray900,
+    },
+    imageSection: {
+        marginTop: 40,
+    },
+    imageThumbnail: {
+        width: 100,
+        height: 100,
+        marginRight: 8,
+        borderRadius: 12,
+    },
+    loader: {
+        marginVertical: 10,
     },
 });

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Alert, RefreshControl } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Alert, RefreshControl, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../styles/colors';
 import NavigationBar from '../components/Common/NavigationBar';
 import NoticeListButton from '../components/NoticeScreen/NoticeListButton';
 
-const API_URL = 'http://gbnam453.iptime.org:2401/api/notices'; // Spring Boot API 주소
+const API_URL = 'http://gbnam453.iptime.org:2401/api/notices';
 
 export default function NoticeScreen({ navigation }) {
     const [notices, setNotices] = useState([]); // 공지사항 데이터
@@ -16,7 +16,7 @@ export default function NoticeScreen({ navigation }) {
         fetchNotices();
     }, []);
 
-    // ✅ 공지 목록 가져오기 함수
+    // 공지사항 목록 가져오기 함수
     const fetchNotices = async () => {
         try {
             const response = await fetch(API_URL);
@@ -24,7 +24,6 @@ export default function NoticeScreen({ navigation }) {
                 throw new Error('서버 응답 실패');
             }
             const data = await response.json();
-
             // ID 기준으로 내림차순 정렬 (최신 공지가 위로)
             const sortedNotices = data.sort((a, b) => b.id - a.id);
             setNotices(sortedNotices);
@@ -37,13 +36,32 @@ export default function NoticeScreen({ navigation }) {
         }
     };
 
-    // ✅ 새로고침 함수
+    // 공지사항을 선택했을 때: 이미지 데이터도 함께 가져와서 NoticeDetailScreen으로 전달 (공지사항 id도 전달)
+    const handleNoticePress = async (notice) => {
+        try {
+            const response = await fetch(`${API_URL}/${notice.id}/images`);
+            if (!response.ok) {
+                throw new Error('이미지 응답 실패');
+            }
+            const images = await response.json();
+            navigation.navigate('NoticeDetailScreen', {
+                id: notice.id,
+                title: notice.title,
+                date: `${notice.date} | ${notice.region}`,
+                content: notice.content,
+                images, // 이미지 목록 전달
+            });
+        } catch (error) {
+            console.error('공지 상세 데이터 가져오기 실패:', error);
+            Alert.alert('에러', '공지 상세 정보를 불러올 수 없습니다.');
+        }
+    };
+
     const onRefresh = () => {
         setRefreshing(true); // 새로고침 시작
         fetchNotices(); // 데이터를 다시 불러옴
     };
 
-    // 로딩 중일 때 로딩 인디케이터 표시
     if (loading) {
         return (
             <SafeAreaView style={styles.container}>
@@ -55,27 +73,25 @@ export default function NoticeScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            {/* 네비게이션 바 */}
             <NavigationBar title="공지사항" />
-
-            {/* 스크롤 가능한 화면 내용 + 새로고침 기능 추가 */}
             <ScrollView
                 contentContainerStyle={styles.scrollContent}
-                refreshControl={
-                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                }
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
             >
                 <View style={styles.row}>
                     {notices.length > 0 ? (
                         notices.map((notice, index) => (
-                            <View key={notice.id || index} style={styles.buttonContainer}>
-                                <NoticeListButton
-                                    title={notice.title}
-                                    content={notice.content}
-                                    date={`${notice.date} | ${notice.region}`} // 지역 | 날짜 형식
-                                    navigation={navigation}
-                                />
-                            </View>
+                            <TouchableOpacity key={notice.id || index} onPress={() => handleNoticePress(notice)}>
+                                <View style={styles.buttonContainer}>
+                                    {/* NoticeListButton에 id도 전달 */}
+                                    <NoticeListButton
+                                        id={notice.id}
+                                        title={notice.title}
+                                        content={notice.content}
+                                        date={`${notice.date} | ${notice.region}`}
+                                    />
+                                </View>
+                            </TouchableOpacity>
                         ))
                     ) : (
                         <Text style={styles.noNoticeText}>공지사항이 없습니다.</Text>
