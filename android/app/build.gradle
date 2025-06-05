@@ -63,14 +63,14 @@ def enableProguardInReleaseBuilds = false
  * The preferred build flavor of JavaScriptCore (JSC)
  *
  * For example, to use the international variant, you can use:
- * `def jscFlavor = 'org.webkit:android-jsc-intl:+'`
+ * `def jscFlavor = io.github.react-native-community:jsc-android-intl:2026004.+`
  *
  * The international variant includes ICU i18n library and necessary data
  * allowing to use e.g. `Date.toLocaleString` and `String.localeCompare` that
  * give correct results when using with locales other than en-US. Note that
  * this variant is about 6MiB larger per architecture than default.
  */
-def jscFlavor = 'org.webkit:android-jsc:+'
+def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
 
 android {
     ndkVersion rootProject.ext.ndkVersion
@@ -82,8 +82,8 @@ android {
         applicationId "com.gbnam.neulbom"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 250325210 // 버전 코드
-        versionName "2.1.0" // 버전 이름
+        versionCode 1
+        versionName "1.0"
     }
     signingConfigs {
         debug {
@@ -91,12 +91,6 @@ android {
             storePassword 'android'
             keyAlias 'androiddebugkey'
             keyPassword 'android'
-        }
-        release {
-            storeFile file('/Users/gbnam/Programming/ReactNative/NEULBOM_FE/android/app/KeyStore.jks')
-            storePassword '040503'
-            keyAlias 'key'
-            keyPassword '040503'
         }
     }
     buildTypes {
@@ -106,7 +100,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
