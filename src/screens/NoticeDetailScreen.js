@@ -6,7 +6,7 @@ import ImageModal from 'react-native-image-modal';
 import colors from '../styles/colors';
 import textStyles from '../styles/textStyles';
 
-const API_URL = 'http://gbnam453.iptime.org:2401/api/notices';
+const API_URL = 'http://9oormthonuniv.gonetis.com:3101/api/notices';
 
 export default function NoticeDetailScreen({ route }) {
     const { id, title, date, content, region } = route.params;
@@ -22,9 +22,6 @@ export default function NoticeDetailScreen({ route }) {
                 }
                 const data = await response.json();
                 setImages(data);
-            } catch (error) {
-                console.error('이미지 가져오기 실패:', error);
-                Alert.alert('에러', '이미지를 불러올 수 없습니다.');
             } finally {
                 setLoadingImages(false);
             }

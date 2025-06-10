@@ -1,9 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:statusBarColor">#F7F7F7</item>
+        <!-- 상태바 텍스트 및 아이콘 색상 -->
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Customize your theme here.
         <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+        -->
     </style>
 
 </resources>

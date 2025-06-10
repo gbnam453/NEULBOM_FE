@@ -71,7 +71,7 @@ export default function HomeScreen() {
     // 공지사항 가져오는 함수
     const fetchNotices = async () => {
         try {
-            const response = await fetch('http://gbnam453.iptime.org:2401/api/notices');
+            const response = await fetch('http://9oormthonuniv.gonetis.com:3101/api/notices');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -97,6 +97,7 @@ export default function HomeScreen() {
     const navigateToDetail = () => {
         if (mainNotice) {
             navigation.navigate('NoticeDetailScreen', {
+                id: mainNotice.id,
                 title: mainNotice.title,
                 content: mainNotice.content,
                 date: `${mainNotice.date} | ${mainNotice.region}`,
@@ -182,7 +183,7 @@ export default function HomeScreen() {
                                     onPress={() => handleNetworkCheck(navigateToDetail)}
                                 />
                             ) : (
-                                <NoticeButton title="인터넷이 연결되어 있지 않아요" />
+                                <NoticeButton title="공지사항 로딩중. . ." />
                             )}
                         </View>
                     </View>

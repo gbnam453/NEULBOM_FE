@@ -82,8 +82,8 @@ android {
         applicationId "com.gbnam.neulbom"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 250605220
+        versionName "2.2.0"
     }
     signingConfigs {
         debug {
