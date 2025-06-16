@@ -71,7 +71,7 @@ export default function HomeScreen() {
     // 공지사항 가져오는 함수
     const fetchNotices = async () => {
         try {
-            const response = await fetch('http://9oormthonuniv.gonetis.com:3101/api/notices');
+            const response = await fetch('http://9oormthonuniv.iptime.org:3101/api/notices');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

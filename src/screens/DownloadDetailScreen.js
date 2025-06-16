@@ -6,7 +6,7 @@ import colors from '../styles/colors';
 import NavigationBar from '../components/Common/NavigationBar';
 import DownloadListButton from '../components/DownloadScreen/DownloadListButton';
 
-const API_URL = 'http://9oormthonuniv.gonetis.com:3101/api/downloads'; // 다운로드 목록 조회 API
+const API_URL = 'http://9oormthonuniv.iptime.org:3101/api/downloads'; // 다운로드 목록 조회 API
 
 export default function DownloadDetailScreen({ navigation }) {
     const [downloads, setDownloads] = useState([]); // 다운로드 데이터를 저장할 상태

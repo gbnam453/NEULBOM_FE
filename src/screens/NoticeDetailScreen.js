@@ -6,7 +6,7 @@ import ImageModal from 'react-native-image-modal';
 import colors from '../styles/colors';
 import textStyles from '../styles/textStyles';
 
-const API_URL = 'http://9oormthonuniv.gonetis.com:3101/api/notices';
+const API_URL = 'http://9oormthonuniv.iptime.org:3101/api/notices';
 
 export default function NoticeDetailScreen({ route }) {
     const { id, title, date, content, region } = route.params;

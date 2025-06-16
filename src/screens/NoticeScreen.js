@@ -5,7 +5,7 @@ import colors from '../styles/colors';
 import NavigationBar from '../components/Common/NavigationBar';
 import NoticeListButton from '../components/NoticeScreen/NoticeListButton';
 
-const API_URL = 'http://9oormthonuniv.gonetis.com:3101/api/notices';
+const API_URL = 'http://9oormthonuniv.iptime.org:3101/api/notices';
 
 export default function NoticeScreen({ navigation }) {
     const [notices, setNotices] = useState([]); // 공지사항 데이터

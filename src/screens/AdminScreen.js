@@ -7,7 +7,7 @@ import NavigationBar from '../components/Common/NavigationBar';
 const AdminScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
-            <WebView source={{ uri: 'http://9oormthonuniv.gonetis.com:3102' }} style={styles.webView} />
+            <WebView source={{ uri: 'http://9oormthonuniv.iptime.org:3102' }} style={styles.webView} />
         </SafeAreaView>
     );
 }
