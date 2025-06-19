@@ -97,7 +97,7 @@ export default function DownloadScreen({ navigation }) {
                             </View>
                         ))
                     ) : (
-                        <Text style={styles.noDownloadText}>다운로드 가능한 자료가 없습니다.</Text>
+                        <Text allowFontScaling={false} style={styles.noDownloadText}>다운로드 가능한 자료가 없습니다.</Text>
                     )}
                 </View>
             </ScrollView>

@@ -19,8 +19,8 @@ export default function UploadListButton({ title, detail, type, link, navigation
     return (
         <TouchableOpacity style={[styles.button]} onPress={handlePress}>
             <View style={styles.titleContainer}>
-                <Text style={textStyles.subtitle18semiBold20}>{title}</Text>
-                <Text style={[textStyles.caption14Medium16, { color: colors.gray700, marginTop: 6 }]}>
+                <Text allowFontScaling={false} style={textStyles.subtitle18semiBold20}>{title}</Text>
+                <Text allowFontScaling={false} style={[textStyles.caption14Medium16, { color: colors.gray700, marginTop: 6 }]}>
                     {detail} {/* 날짜 값 표시 */}
                 </Text>
             </View>

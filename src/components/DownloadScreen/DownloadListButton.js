@@ -12,8 +12,8 @@ export default function DownloadListButton({ title, category, type, link, naviga
     return (
         <TouchableOpacity style={[styles.button]} onPress={handlePress}>
             <View style={styles.titleContainer}>
-                <Text style={textStyles.subtitle18semiBold20}>{title}</Text>
-                <Text style={[textStyles.caption14Medium16, { color: colors.gray700, marginTop: 6 }]}>
+                <Text allowFontScaling={false} style={textStyles.subtitle18semiBold20}>{title}</Text>
+                <Text allowFontScaling={false} style={[textStyles.caption14Medium16, { color: colors.gray700, marginTop: 6 }]}>
                     {category + ' | ' +type} {/* 날짜 값 표시 */}
                 </Text>
             </View>

@@ -6,7 +6,7 @@ export default function TwoByOneButton({ title, onPress, color = 'white', imageS
     return (
         <TouchableOpacity style={[styles.button, { backgroundColor: color }]} onPress={onPress}>
             <View style={styles.titleContainer}>
-                <Text style={textStyles.title20Bold}>{title}</Text>
+                <Text allowFontScaling={false} style={textStyles.title20Bold}>{title}</Text>
             </View>
             {imageSource && ( // 이미지 경로가 전달되었을 경우에만 렌더링
                 <Image

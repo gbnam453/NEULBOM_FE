@@ -289,7 +289,7 @@ export default function HomeScreen() {
 
                 {/* 버전 표시 */}
                 <View style={styles.versionContainer}>
-                    <Text style={[textStyles.subtitle12Bold14, styles.versionText, { color: colors.gray300 }]}>
+                    <Text allowFontScaling={false} style={[textStyles.subtitle12Bold14, styles.versionText, { color: colors.gray300 }]}>
                         {pkg.version} gbnam
                     </Text>
                 </View>

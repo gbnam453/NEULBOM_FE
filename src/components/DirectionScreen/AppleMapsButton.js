@@ -10,7 +10,7 @@ export default function AppleMapsButton({ title, onPress, color = 'white', image
                 {/* 이미지 */}
                 {imageSource && <Image source={imageSource} style={styles.image} />}
                 {/* 텍스트 */}
-                <Text style={styles.title}>{title}</Text>
+                <Text allowFontScaling={false} style={styles.title}>{title}</Text>
             </View>
         </TouchableOpacity>
     );

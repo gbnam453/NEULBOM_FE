@@ -15,7 +15,7 @@ export default function ThreeByOneButton_V2({title1, title2, title3, imageSource
                     />
                 )}
                 <View style={styles.titleContainer}>
-                    <Text style={textStyles.title18Bold}>{title1}</Text>
+                    <Text allowFontScaling={false} style={textStyles.title18Bold}>{title1}</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.contentContainer, styles.innerContainer]} onPress={onPress2}>
@@ -27,7 +27,7 @@ export default function ThreeByOneButton_V2({title1, title2, title3, imageSource
                     />
                 )}
                 <View style={styles.titleContainer}>
-                    <Text style={textStyles.title18Bold}>{title2}</Text>
+                    <Text allowFontScaling={false} style={textStyles.title18Bold}>{title2}</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.contentContainer, styles.innerContainer]} onPress={onPress3}>
@@ -39,7 +39,7 @@ export default function ThreeByOneButton_V2({title1, title2, title3, imageSource
                     />
                 )}
                 <View style={styles.titleContainer}>
-                    <Text style={textStyles.title18Bold}>{title3}</Text>
+                    <Text allowFontScaling={false} style={textStyles.title18Bold}>{title3}</Text>
                 </View>
             </TouchableOpacity>
         </View>

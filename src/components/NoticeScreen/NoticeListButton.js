@@ -15,8 +15,8 @@ export default function NoticeListButton({ id, title, content, date, color = 'wh
     return (
         <TouchableOpacity style={styles.button} onPress={handlePress}>
             <View style={styles.titleContainer}>
-                <Text style={textStyles.subtitle18semiBold20}>{title}</Text>
-                <Text style={[textStyles.caption14Medium16, { color: colors.gray700, marginTop: 6 }]}>
+                <Text allowFontScaling={false} style={textStyles.subtitle18semiBold20}>{title}</Text>
+                <Text allowFontScaling={false} style={[textStyles.caption14Medium16, { color: colors.gray700, marginTop: 6 }]}>
                     {date}
                 </Text>
             </View>

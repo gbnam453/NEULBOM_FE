@@ -34,13 +34,13 @@ export default function NoticeDetailScreen({ route }) {
             <NavigationBar title="공지사항" />
             <ScrollView contentContainerStyle={styles.content}>
                 <View style={styles.titleContainer}>
-                    <Text style={textStyles.subtitle18semiBold20}>{title}</Text>
-                    <Text style={[textStyles.caption14Medium16, styles.date]}>
+                    <Text allowFontScaling={false} style={textStyles.subtitle18semiBold20}>{title}</Text>
+                    <Text allowFontScaling={false} style={[textStyles.caption14Medium16, styles.date]}>
                         {date}{region}
                     </Text>
                 </View>
                 <View style={styles.detailContainer}>
-                    <Text style={[textStyles.caption14Medium16, styles.detail]}>
+                    <Text allowFontScaling={false} style={[textStyles.caption14Medium16, styles.detail]}>
                         {content}
                     </Text>
                 </View>

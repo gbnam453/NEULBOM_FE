@@ -12,7 +12,7 @@ export default function ContactScreen() {
             <NavigationBar title="문의처" />
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 {/* 상단 문구 */}
-                <Text style={styles.title}>
+                <Text allowFontScaling={false} style={styles.title}>
                     호서대학교 산학협력단
                     {'\n'}벤처교육원 AI·SW교육센터 늘봄학교팀
                 </Text>
@@ -43,7 +43,7 @@ export default function ContactScreen() {
                     />
                 </View>
                 <View style={styles.feedbackContainer}>
-                    <Text style={styles.feedbackText} onPress={() => Linking.openURL('mailto:gbnam453@gmail.com')}>
+                    <Text allowFontScaling={false} style={styles.feedbackText} onPress={() => Linking.openURL('mailto:gbnam453@gmail.com')}>
                         앱에 관한 의견 보내기
                     </Text>
                 </View>

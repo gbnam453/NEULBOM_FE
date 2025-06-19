@@ -99,7 +99,7 @@ export default function DownloadDetailScreen({ navigation }) {
                             ]}
                             onPress={() => setSelectedCategory(category)}
                         >
-                            <Text style={[
+                            <Text allowFontScaling={false} style={[
                                 styles.categoryText,
                                 selectedCategory === category && styles.selectedCategoryText
                             ]}>
@@ -129,7 +129,7 @@ export default function DownloadDetailScreen({ navigation }) {
                             </View>
                         ))
                     ) : (
-                        <Text style={styles.noDownloadText}>해당 카테고리의 다운로드 가능한 자료가 없습니다.</Text>
+                        <Text allowFontScaling={false} style={styles.noDownloadText}>해당 카테고리의 다운로드 가능한 자료가 없습니다.</Text>
                     )}
                 </View>
             </ScrollView>

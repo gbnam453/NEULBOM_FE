@@ -84,12 +84,12 @@ export default function DirectionScreen({ navigation }) {
                 </View>
 
                 {/* 학교 이름 */}
-                <Text style={[textStyles.title22Bold, styles.schoolName]}>
+                <Text allowFontScaling={false} style={[textStyles.title22Bold, styles.schoolName]}>
                     호서대학교 KTX캠퍼스
                 </Text>
 
                 {/* 주소 텍스트 */}
-                <Text style={[textStyles.subtitle14SemiBold16, styles.addressText]}>
+                <Text allowFontScaling={false} style={[textStyles.subtitle14SemiBold16, styles.addressText]}>
                     충남 아산시 배방읍 고속철대로 71 (우)31470
                 </Text>
 

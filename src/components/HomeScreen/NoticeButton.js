@@ -7,11 +7,11 @@ export default function NoticeButton({ title, onPress }) {
         <TouchableOpacity style={[styles.button, { backgroundColor: '#1E2530' }]} onPress={onPress}>
             {/* 공지 상자 */}
             <View style={styles.noticeBox}>
-                <Text style={[textStyles.title14Bold, styles.noticeText]}>공지</Text>
+                <Text allowFontScaling={false} style={[textStyles.title14Bold, styles.noticeText]}>공지</Text>
             </View>
             {/* 기존 텍스트 */}
             <View style={styles.titleContainer}>
-                <Text style={[textStyles.subtitle14SemiBold21, styles.whiteText]}>{title}</Text>
+                <Text allowFontScaling={false} style={[textStyles.subtitle14SemiBold21, styles.whiteText]}>{title}</Text>
             </View>
         </TouchableOpacity>
     );

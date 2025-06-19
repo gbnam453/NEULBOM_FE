@@ -14,8 +14,8 @@ export default function DownloadRegionButton({ region, category, color = 'white'
     return (
         <TouchableOpacity style={[styles.button, { backgroundColor: color }]} onPress={handlePress}>
             <View style={styles.titleContainer}>
-                <Text style={textStyles.subtitle18semiBold20}>{region}</Text>
-                <Text style={[textStyles.caption14Medium16, { color: colors.gray700, marginTop: 6 }]}>
+                <Text allowFontScaling={false} style={textStyles.subtitle18semiBold20}>{region}</Text>
+                <Text allowFontScaling={false} style={[textStyles.caption14Medium16, { color: colors.gray700, marginTop: 6 }]}>
                     {category} {/* 카테고리 값 표시 */}
                 </Text>
             </View>

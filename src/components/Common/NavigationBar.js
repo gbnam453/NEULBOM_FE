@@ -16,7 +16,7 @@ const NavigationBar = ({ title }) => {
                 <ButtonBack width={24} height={24} />
             </TouchableOpacity>
             {/* 타이틀 */}
-            <Text style={[textStyles.title22Bold, styles.title]}>{title}</Text>
+            <Text allowFontScaling={false} style={[textStyles.title22Bold, styles.title]}>{title}</Text>
         </View>
     );
 };

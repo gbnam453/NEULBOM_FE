@@ -8,8 +8,8 @@ export default function NotificationScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
-                <Text style={styles.title}>인사말</Text>
-                <Text style={styles.description}>
+                <Text allowFontScaling={false} style={styles.title}>인사말</Text>
+                <Text allowFontScaling={false} style={styles.description}>
                     이곳은 인사말을 보여주는 화면입니다.
                 </Text>
             </View>
